@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Epreuve E2 — Vendredi — Kyllian · Alyanna · Adele · Kyrann</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f6f3ee;
+  --surface: #ffffff;
+  --surface2: #f0ece4;
+  --border: #ddd5c5;
+  --border2: #c5b8a0;
+  --text: #1a1510;
+  --text2: #6a5a45;
+  --text3: #9a8a72;
+  --accent: #b84000;
+  --accent-dim: rgba(184,64,0,0.1);
+  --blue: #0048b0;
+  --blue-dim: rgba(0,72,176,0.1);
+  --green: #006030;
+  --green-dim: rgba(0,96,48,0.1);
+  --red: #b80020;
+  --red-dim: rgba(184,0,32,0.1);
+  --gold: #b88000;
+  --gold-dim: rgba(184,128,0,0.1);
+  --purple: #600090;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+
+/* HEADER */
+.header{background:var(--text);color:#f6f3ee;padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.8rem;}
+.header-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.05rem;}
+.header-logo span{color:#d4824a;}
+.header-info{font-size:0.75rem;opacity:0.5;text-align:right;line-height:1.6;}
+
+/* MODE BAR */
+.mode-bar{background:var(--surface);border-bottom:2px solid var(--border);padding:0.65rem 2rem;display:flex;gap:0.5rem;align-items:center;flex-wrap:wrap;position:sticky;top:0;z-index:100;}
+.mode-btn{padding:0.42rem 1rem;border-radius:999px;border:1.5px solid var(--border);font-family:'DM Sans',sans-serif;font-size:0.8rem;font-weight:600;cursor:pointer;background:var(--surface);color:var(--text2);transition:all 0.15s;}
+.mode-btn:hover{border-color:var(--accent);color:var(--accent);}
+.mode-btn.active{background:var(--accent);border-color:var(--accent);color:#fff;}
+.mode-sep{width:1px;height:20px;background:var(--border2);margin:0 0.3rem;}
+
+/* VIEWS */
+.main{padding:2rem;max-width:1000px;margin:0 auto;}
+.view{display:none;}
+.view.active{display:block;animation:fadeUp 0.2s ease;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+
+/* PAGE HEADER */
+.pg-title{font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;letter-spacing:-0.03em;margin-bottom:0.35rem;}
+.pg-title span{color:var(--accent);}
+.pg-desc{color:var(--text2);font-size:0.88rem;line-height:1.7;max-width:660px;margin-bottom:2rem;}
+
+/* CANDIDATE HERO */
+.candidate-hero{border-radius:16px;overflow:hidden;margin-bottom:1.5rem;box-shadow:0 4px 20px rgba(26,21,16,0.12);}
+.candidate-topbar{padding:1.2rem 1.5rem;color:#fff;display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:0.8rem;}
+.candidate-topbar h2{font-family:'Syne',sans-serif;font-weight:800;font-size:1.2rem;}
+.candidate-topbar p{font-size:0.8rem;opacity:0.65;margin-top:0.2rem;}
+.officiel-badge{background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.3);color:#fff;font-size:0.68rem;font-weight:700;padding:3px 10px;border-radius:999px;text-transform:uppercase;letter-spacing:0.08em;}
+
+/* CARDS */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:13px;padding:1.3rem;margin-bottom:1.1rem;box-shadow:0 1px 8px rgba(26,21,16,0.06);}
+.card-title{font-family:'Syne',sans-serif;font-size:0.93rem;font-weight:800;margin-bottom:0.9rem;display:flex;align-items:center;gap:0.5rem;}
+.card-accent{border-left:4px solid var(--accent);}
+.card-blue{border-left:4px solid var(--blue);}
+.card-green{border-left:4px solid var(--green);}
+.card-gold{border-left:4px solid var(--gold);}
+.card-red{border-left:4px solid var(--red);}
+.card-purple{border-left:4px solid var(--purple);}
+.card-dark{background:var(--text);color:#f6f3ee;border:none;}
+
+/* SITUATION BADGE */
+.sit-badge{display:inline-flex;align-items:center;gap:0.4rem;padding:3px 10px;border-radius:999px;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.8rem;}
+.sit1{background:var(--accent-dim);color:var(--accent);border:1px solid rgba(184,64,0,0.2);}
+.sit2{background:var(--blue-dim);color:var(--blue);border:1px solid rgba(0,72,176,0.2);}
+
+/* CRITERES OFFICIEL */
+.critere-offic{display:flex;align-items:flex-start;gap:0.8rem;padding:0.6rem 0;border-bottom:1px dashed var(--border);}
+.critere-offic:last-child{border-bottom:none;}
+.critere-check{width:18px;height:18px;border-radius:4px;border:1.5px solid var(--border2);flex-shrink:0;margin-top:2px;background:var(--surface2);}
+.critere-text{font-size:0.84rem;line-height:1.55;color:var(--text2);}
+.critere-text strong{color:var(--text);}
+
+/* CALC TABLE */
+.calc-table{width:100%;border-collapse:collapse;font-size:0.84rem;}
+.calc-table th{background:var(--text);color:#f6f3ee;padding:0.55rem 0.8rem;text-align:left;font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;}
+.calc-table td{padding:0.6rem 0.8rem;border-bottom:1px solid var(--border);vertical-align:top;}
+.calc-table tr:last-child td{border:none;}
+.calc-table tr:hover td{background:var(--surface2);}
+.calc-table .total-row td{background:var(--text);color:#f6f3ee;font-weight:700;}
+.calc-table .subtotal-row td{background:var(--surface2);font-weight:600;}
+.num{text-align:right;font-variant-numeric:tabular-nums;}
+.formula{font-size:0.77rem;color:var(--text3);font-style:italic;}
+
+/* INFO BOXES */
+.info-box{border-radius:9px;padding:0.85rem 1rem;font-size:0.84rem;line-height:1.7;margin-bottom:0.8rem;}
+.info-box strong{font-weight:700;}
+.ib-warn{background:var(--red-dim);border:1px solid rgba(184,0,32,0.25);color:#6a0010;}
+.ib-warn::before{content:'⚠️ ';}
+.ib-tip{background:var(--gold-dim);border:1px solid rgba(184,128,0,0.25);color:#5a4000;}
+.ib-tip::before{content:'💡 ';}
+.ib-green{background:var(--green-dim);border:1px solid rgba(0,96,48,0.25);color:#003018;}
+.ib-green::before{content:'✅ ';}
+.ib-blue{background:var(--blue-dim);border:1px solid rgba(0,72,176,0.25);color:#002060;}
+
+/* CLIENT PROFILE */
+.client-profile{background:var(--surface2);border-radius:10px;padding:1.1rem 1.2rem;margin-bottom:1rem;}
+.client-name{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;margin-bottom:0.15rem;}
+.client-job{font-size:0.8rem;color:var(--text2);margin-bottom:0.7rem;}
+.client-desc{font-size:0.86rem;line-height:1.7;color:var(--text2);}
+.client-desc strong{color:var(--text);}
+.soncase-chips{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:0.7rem;}
+.sc{padding:3px 9px;border-radius:999px;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.04em;}
+.sc-S{background:var(--red-dim);color:var(--red);}
+.sc-O{background:var(--gold-dim);color:var(--gold);}
+.sc-N{background:var(--blue-dim);color:var(--blue);}
+.sc-C{background:var(--green-dim);color:var(--green);}
+.sc-A{background:#f0e0ff;color:var(--purple);}
+.sc-E{background:var(--green-dim);color:var(--green);}
+
+/* STEPS */
+.step-list{display:flex;flex-direction:column;gap:0.7rem;}
+.step-item{display:flex;gap:0.9rem;}
+.step-num{width:30px;height:30px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:0.82rem;color:#fff;}
+.step-content{background:var(--surface2);border-radius:9px;padding:0.8rem 1rem;flex:1;}
+.step-content h4{font-family:'Syne',sans-serif;font-weight:700;font-size:0.86rem;margin-bottom:0.3rem;}
+.step-content p,.step-content li{font-size:0.83rem;color:var(--text2);line-height:1.65;}
+.step-content ul{padding-left:1rem;}
+
+/* GRILLE OFFICIELLE */
+.grille-offic{width:100%;border-collapse:collapse;font-size:0.84rem;}
+.grille-offic th{background:var(--text);color:#f6f3ee;padding:0.6rem 0.8rem;text-align:center;font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;}
+.grille-offic th:first-child{text-align:left;}
+.grille-offic td{padding:0.65rem 0.8rem;border:1px solid var(--border);font-size:0.83rem;vertical-align:middle;}
+.grille-offic .check-td{text-align:center;width:50px;}
+.grille-offic .note-td{text-align:center;width:70px;font-weight:700;color:var(--accent);}
+.grille-offic tr:hover td{background:var(--surface2);}
+.grille-offic .section-row td{background:var(--surface2);font-weight:700;font-size:0.82rem;color:var(--text2);text-transform:uppercase;letter-spacing:0.04em;}
+
+/* PRINT */
+@media print{
+  .mode-bar,.header{display:none !important;}
+  .view:not(.active){display:none !important;}
+  .main{padding:0.5rem;}
+  body{background:white;}
+  .candidate-hero{page-break-inside:avoid;}
+  .card{page-break-inside:avoid;box-shadow:none;}
+}
+
+/* G2 */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+@media(max-width:640px){.g2{grid-template-columns:1fr;}.main{padding:1rem;}}
+::-webkit-scrollbar{width:5px;}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:999px;}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-logo">E2 <span>Epreuves</span> — Vendredi</div>
+  <div class="header-info">LP Francois de Mahy — CSVCPTH<br>Grille officielle CCF — Session 2026</div>
+</header>
+
+<div class="mode-bar">
+  <span style="font-size:0.78rem;font-weight:700;color:var(--text3);margin-right:0.3rem">Candidat :</span>
+  <button class="mode-btn active" onclick="showView('kyllian')">🪵 Kyllian</button>
+  <button class="mode-btn" onclick="showView('alyanna')">🌿 Alyanna</button>
+  <button class="mode-btn" onclick="showView('adele')">🔩 Adele</button>
+  <button class="mode-btn" onclick="showView('kyrann')">🪚 Kyrann</button>
+  <div class="mode-sep"></div>
+  <button class="mode-btn" onclick="window.print()" style="border-color:var(--blue);color:var(--blue)">🖨 Imprimer</button>
+</div>
+
+<div class="main">
+
+<!-- ══════════════════════════════════════════
+     KYLLIAN — CATENA PRO — BARDAGE BOIS
+══════════════════════════════════════════ -->
+<div class="view active" id="view-kyllian">
+  <div class="candidate-hero">
+    <div class="candidate-topbar" style="background:linear-gradient(135deg,#5a3010,#8a5020)">
+      <div>
+        <h2>🪵 Kyllian Fontaine</h2>
+        <p>CATENA PRO — Le Tampon · Rayon Bois &amp; Bardage</p>
+      </div>
+      <span class="officiel-badge">CCF E2 — Session 2026</span>
+    </div>
+  </div>
+
+  <!-- CONTEXTE ENTREPRISE -->
+  <div class="card card-accent">
+    <div class="card-title">🏪 Contexte entreprise — CATENA PRO Le Tampon</div>
+    <p style="font-size:0.85rem;line-height:1.75;color:var(--text2)">CATENA PRO est un negoce en materiaux de construction specialise dans la clientele professionnelle et les particuliers exigeants. Le rayon bois propose du bois de structure, du bardage toutes gammes et toute la quincaillerie associee. Kyllian est conseiller vendeur specialise bardage bois et travaux exterieurs. La TVA applicable a La Reunion est de <strong>8,5%</strong>.</p>
+  </div>
+
+  <!-- CLIENT -->
+  <div class="card card-accent">
+    <div class="card-title">👤 Profil du client — Situation de vente</div>
+    <div class="client-profile">
+      <div class="client-name">M. Celestin — Arnaud, 48 ans</div>
+      <div class="client-job">Artisan peintre — Independant, 2 ouvriers</div>
+      <div class="client-desc">
+        Arnaud est artisan peintre depuis 20 ans au Tampon. Un de ses clients particuliers lui a confie un chantier de <strong>renovation complete de facade</strong> sur une maison de plain-pied a La Plaine-des-Cafres. La facade principale fait <strong>8 m de large sur 3,2 m de hauteur</strong>. Le client final souhaite un bardage bois horizontal en pin classe 4, profil 27×145 mm. Arnaud viendra faire la pose lui-meme avec ses ouvriers mais il n'a jamais pose de bardage bois — il connait la peinture, pas la menuiserie exterieure. Il a un devis a remettre a son client d'ici 3 jours. Budget client final : <strong>environ 3 500 euros TTC materiel</strong>.
+        <div class="soncase-chips">
+          <span class="sc sc-S">Securite</span>
+          <span class="sc sc-A">Argent</span>
+          <span class="sc sc-C">Confort</span>
+        </div>
+      </div>
+    </div>
+    <div class="info-box ib-tip">Mobile principal SECURITE : Arnaud n'a jamais pose de bardage. Il veut s'assurer de ne pas faire d'erreur technique qui compromettra la durabilite du chantier. Il en va de sa reputation professionnelle aupres de son client.</div>
+  </div>
+
+  <!-- SITUATION 1 -->
+  <div class="sit-badge sit1">📋 Situation 1 — Vente de la solution technique</div>
+  <div class="card card-accent">
+    <div class="card-title">🎯 La mission de Kyllian — Situation 1</div>
+    <div class="step-list">
+      <div class="step-item">
+        <div class="step-num" style="background:var(--accent)">1</div>
+        <div class="step-content"><h4>Accueil & decouverte</h4><p>Identifier le metier d'Arnaud, le projet precis, ses competences en pose de bardage, le budget client final.</p></div>
+      </div>
+      <div class="step-item">
+        <div class="step-num" style="background:var(--accent)">2</div>
+        <div class="step-content"><h4>Proposition du systeme bardage complet</h4><ul><li>Lames pin CL4 27×145 mm — profil rainure-bouvete</li><li>Tasseaux CL4 27×40 mm — ossature ventilee</li><li>Pare-pluie membrane HPV</li><li>Visserie inox A2 4×50 mm — OBLIGATOIRE sur bois traite</li><li>Agrafes inox pour pare-pluie</li><li>Profile de depart aluminium</li></ul></div>
+      </div>
+      <div class="step-item">
+        <div class="step-num" style="background:var(--accent)">3</div>
+        <div class="step-content"><h4>Argumentaire SONCASE centre sur la Securite</h4><p>Expliquer pourquoi la classe 4 est obligatoire a La Plaine-des-Cafres (altitude, humidite elevee). Insister sur la lame d'air ventilee et le pare-pluie pour la durabilite. Vis inox = obligation technique sur bois traite autoclave.</p></div>
+      </div>
+      <div class="step-item">
+        <div class="step-num" style="background:var(--accent)">4</div>
+        <div class="step-content"><h4>Ventes complementaires & additionnelles</h4><ul><li>Lasure/huile UV exterieure pour bois — protection et finition</li><li>Traitement pot pour les coupes sur chantier</li><li>Solin d'etancheite pied de bardage</li><li>Grille anti-insectes inox bas de facade</li><li>EPI : gants anti-coupures, lunettes, masque FFP2</li></ul></div>
+      </div>
+      <div class="step-item">
+        <div class="step-num" style="background:var(--accent)">5</div>
+        <div class="step-content"><h4>Services associes CATENA PRO</h4><ul><li>Livraison chantier La Plaine (palette bardage = lourd)</li><li>Conseil technique de pose inclus</li><li>Compte pro CATENA PRO : tarifs degressifs pour artisans</li><li>Debit sur mesure en magasin</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SITUATION 2 — CALCULS -->
+  <div class="sit-badge sit2">📐 Situation 2 — Calculs & faisabilite technique</div>
+  <div class="card card-blue">
+    <div class="card-title">🧮 Donnees du chantier</div>
+    <div class="g2">
+      <div class="info-box ib-blue" style="margin-bottom:0">
+        <strong>Facade :</strong> 8 m de large × 3,2 m de hauteur<br>
+        <strong>Surface brute :</strong> 8 × 3,2 = <strong>25,6 m²</strong><br>
+        <strong>Deduction ouvertures :</strong> 1 fenetre 1,2×1,2 m = 1,44 m²<br>
+        <strong>Surface nette :</strong> 25,6 - 1,44 = <strong>24,16 m²</strong>
+      </div>
+      <div class="info-box ib-blue" style="margin-bottom:0">
+        <strong>Profil lame :</strong> 27×145 mm rainure-bouvete<br>
+        <strong>Largeur utile :</strong> 145 - 20 (recouvrement) = <strong>125 mm utile</strong><br>
+        <strong>Espacement tasseaux :</strong> 50 cm entre axes<br>
+        <strong>TVA Reunion :</strong> 8,5%
+      </div>
+    </div>
+  </div>
+
+  <div class="card card-blue">
+    <div class="card-title">📊 Calcul 1 — Lames de bardage (ml)</div>
+    <div style="overflow-x:auto">
+      <table class="calc-table">
+        <thead><tr><th>Etape</th><th>Calcul</th><th class="num">Resultat</th></tr></thead>
+        <tbody>
+          <tr><td>Surface nette facade</td><td class="formula">25,6 m² - 1,44 m² (fenetre)</td><td class="num"><strong>24,16 m²</strong></td></tr>
+          <tr><td>Metrage lineaire net</td><td class="formula">24,16 m² ÷ 0,125 m (largeur utile lame)</td><td class="num"><strong>193,3 ml</strong></td></tr>
+          <tr><td>Coefficient de chute +10%</td><td class="formula">193,3 × 1,10</td><td class="num"><strong>212,6 ml</strong></td></tr>
+          <tr><td><strong>A commander</strong></td><td class="formula">Arrondi superieur — barres de 4 m → 54 barres</td><td class="num"><strong>213 ml ≈ 54 barres 4 m</strong></td></tr>
+          <tr class="subtotal-row"><td>Prix lame pin CL4 27×145</td><td class="formula">213 ml × 3,80 € HT/ml</td><td class="num"><strong>809,40 € HT</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card card-blue">
+    <div class="card-title">📊 Calcul 2 — Tasseaux (ml)</div>
+    <div style="overflow-x:auto">
+      <table class="calc-table">
+        <thead><tr><th>Etape</th><th>Calcul</th><th class="num">Resultat</th></tr></thead>
+        <tbody>
+          <tr><td>Largeur facade</td><td class="formula">8 m de large</td><td class="num">8 m</td></tr>
+          <tr><td>Nombre de tasseaux verticaux</td><td class="formula">8 m ÷ 0,50 m + 1 = 17 tasseaux</td><td class="num"><strong>17 tasseaux</strong></td></tr>
+          <tr><td>Longueur par tasseau</td><td class="formula">3,2 m de hauteur</td><td class="num">3,2 m</td></tr>
+          <tr><td>Metrage total net</td><td class="formula">17 × 3,2 m</td><td class="num"><strong>54,4 ml</strong></td></tr>
+          <tr><td>+ 10% chute et recoupes</td><td class="formula">54,4 × 1,10</td><td class="num"><strong>59,8 ml</strong></td></tr>
+          <tr class="subtotal-row"><td>Prix tasseaux CL4 27×40</td><td class="formula">60 ml × 1,20 € HT/ml</td><td class="num"><strong>72,00 € HT</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card card-blue">
+    <div class="card-title">📊 Calcul 3 — Visserie inox</div>
+    <div style="overflow-x:auto">
+      <table class="calc-table">
+        <thead><tr><th>Etape</th><th>Calcul</th><th class="num">Resultat</th></tr></thead>
+        <tbody>
+          <tr><td>Metrage lames</td><td class="formula">213 ml</td><td class="num">213 ml</td></tr>
+          <tr><td>Points de fixation</td><td class="formula">213 ml ÷ 0,50 m (espacement tasseaux)</td><td class="num"><strong>426 points</strong></td></tr>
+          <tr><td>Vis par point (2 vis/lame/tasseau)</td><td class="formula">426 × 2 vis</td><td class="num"><strong>852 vis</strong></td></tr>
+          <tr><td>+ 5% perte</td><td class="formula">852 × 1,05</td><td class="num"><strong>895 vis</strong></td></tr>
+          <tr><td>Boites de 200 vis</td><td class="formula">895 ÷ 200 = 4,47 → 5 boites</td><td class="num"><strong>5 boites</strong></td></tr>
+          <tr class="subtotal-row"><td>Prix visserie inox A2 4×50</td><td class="formula">5 boites × 14,00 € HT</td><td class="num"><strong>70,00 € HT</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card card-blue">
+    <div class="card-title">📊 Devis total — Recapitulatif TTC 8,5%</div>
+    <div style="overflow-x:auto">
+      <table class="calc-table">
+        <thead><tr><th>Designation</th><th class="num">Qte</th><th class="num">PU HT</th><th class="num">Total HT</th></tr></thead>
+        <tbody>
+          <tr><td>Lames pin CL4 27×145 mm</td><td class="num">213 ml</td><td class="num">3,80 €</td><td class="num">809,40 €</td></tr>
+          <tr><td>Tasseaux pin CL4 27×40 mm</td><td class="num">60 ml</td><td class="num">1,20 €</td><td class="num">72,00 €</td></tr>
+          <tr><td>Pare-pluie HPV (rouleau 50 m²)</td><td class="num">1 rouleau</td><td class="num">45,00 €</td><td class="num">45,00 €</td></tr>
+          <tr><td>Visserie inox A2 4×50 (boite 200)</td><td class="num">5 boites</td><td class="num">14,00 €</td><td class="num">70,00 €</td></tr>
+          <tr><td>Agrafes inox pare-pluie (boite 200)</td><td class="num">1 boite</td><td class="num">12,00 €</td><td class="num">12,00 €</td></tr>
+          <tr><td>Profile de depart aluminium 3 m</td><td class="num">3 ml</td><td class="num">9,00 €</td><td class="num">27,00 €</td></tr>
+          <tr class="subtotal-row"><td colspan="3"><strong>SOUS-TOTAL HT — Systeme bardage</strong></td><td class="num"><strong>1 035,40 €</strong></td></tr>
+          <tr><td>Lasure UV exterieure bois 1 L (1L/6m²)</td><td class="num">5 L</td><td class="num">18,00 €</td><td class="num">90,00 €</td></tr>
+          <tr><td>Traitement bout de coupe 1 L</td><td class="num">1 pot</td><td class="num">15,00 €</td><td class="num">15,00 €</td></tr>
+          <tr><td>Solin PVC pied de bardage 3 m</td><td class="num">3 ml</td><td class="num">8,00 €</td><td class="num">24,00 €</td></tr>
+          <tr><td>Grille anti-insectes inox rouleau 5 m</td><td class="num">2 rouleaux</td><td class="num">28,00 €</td><td class="num">56,00 €</td></tr>
+          <tr><td>EPI (gants + lunettes + masque FFP2)</td><td class="num">1 kit</td><td class="num">25,00 €</td><td class="num">25,00 €</td></tr>
+          <tr><td>Livraison chantier La Plaine</td><td class="num">forfait</td><td class="num">59,00 €</td><td class="num">59,00 €</td></tr>
+          <tr class="subtotal-row"><td colspan="3"><strong>TOTAL HT</strong></td><td class="num"><strong>1 304,40 €</strong></td></tr>
+          <tr class="subtotal-row"><td colspan="3">TVA 8,5%</td><td class="num">110,87 €</td></tr>
+          <tr class="total-row"><td colspan="3">TOTAL TTC</td><td class="num">1 415,27 €</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="info-box ib-green" style="margin-top:1rem">Le total de 1 415 € TTC est tres en dessous du budget client de 3 500 € TTC. Kyllian peut proposer des finitions plus hautes de gamme (lasure teintee, plan de travail quartz, grille design) ou signaler que le budget restant (~2 085 €) peut couvrir la main-d'oeuvre et les finitions supplementaires.</div>
+  </div>
+
+  <div class="card card-gold">
+    <div class="card-title">📋 Grille officielle — Criteres evalues</div>
+    <div style="overflow-x:auto"><table class="grille-offic">
+      <thead><tr><th>Critere officiel</th><th>TI</th><th>I</th><th>S</th><th>TS</th></tr></thead>
+      <tbody>
+        <tr class="section-row"><td colspan="5">Situation 1 — Vente de la solution technique</td></tr>
+        <tr><td>Mobilisation des connaissances techniques (classe 4, lame d'air, vis inox)</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td></tr>
+        <tr><td>Argumentation adaptee aux mobiles SECURITE et ARGENT du client</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td></tr>
+        <tr><td>Pertinence des conseils (pare-pluie, traitement coupes, pose horizontale)</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td></tr>
+        <tr><td>Qualite de la communication (accueil artisan pro, vocabulaire technique)</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td></tr>
+        <tr><td>Finalisation (devis, livraison, compte pro, EPI proposes)</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td></tr>
+        <tr><td>Auto-analyse points forts / faibles de la prestation</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td></tr>
+        <tr class="section-row"><td colspan="5">Situation 2 — Calculs &amp; faisabilite</td></tr>
+        <tr><td>Diagnostic faisabilite (surface nette, config pose, contraintes altitude)</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td></tr>
+        <tr><td>Pertinence solutions (systeme complet : lames + tasseaux + pare-pluie)</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td></tr>
+        <tr><td>Justesse calculs (metrage lames, tasseaux, visserie, devis TTC)</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td></tr>
+        <tr><td>Fiabilite devis (quantites exactes, TVA 8,5%, total coherent budget)</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td></tr>
+        <tr><td>Prise en compte remarques client (devis dans 3 jours, budget 3 500 €)</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td></tr>
+        <tr><td>EPI proposes, respect reglementation bois traite</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     ALYANNA — AMENAGEMENT EXTERIEUR — TERRASSE
+══════════════════════════════════════════ -->
+<div class="view" id="view-alyanna">
+  <div class="candidate-hero">
+    <div class="candidate-topbar" style="background:linear-gradient(135deg,#003820,#006040)">
+      <div><h2>🌿 Alyanna</h2><p>Amenagement exterieur — Terrasse, clotures, pergolas</p></div>
+      <span class="officiel-badge">CCF E2 — Session 2026</span>
+    </div>
+  </div>
+
+  <div class="card card-green">
+    <div class="card-title">🏪 Contexte entreprise</div>
+    <p style="font-size:0.85rem;line-height:1.75;color:var(--text2)">L'enseigne propose des solutions completes d'amenagement exterieur : revetements de terrasse (carrelage, composite, bois), pergolas, clotures et mobilier de jardin. Alyanna conseille sur les projets terrasse et amenagement. TVA Reunion : <strong>8,5%</strong>.</p>
+  </div>
+
+  <div class="card card-green">
+    <div class="card-title">👤 Profil du client</div>
+    <div class="client-profile">
+      <div class="client-name">Mme Grondin-Lauret — Isabelle, 52 ans</div>
+      <div class="client-job">Directrice d'ecole — Particuliere, logement en propriete</div>
+      <div class="client-desc">
+        Isabelle vient de faire construire une extension de maison a Saint-Pierre. Elle dispose d'une <strong>terrasse brute de 28 m²</strong> (7 m × 4 m) qu'elle veut amenager. Elle souhaite un revetement antiderapant et durable, une <strong>pergola bioclimatique</strong> pour se proteger du soleil l'apres-midi (terrasse exposee plein ouest), et quelques pots de plantation pour vegetaliser l'espace. Elle recoit regulierement sa famille et ses collegues. Elle a un budget de <strong>8 000 euros TTC</strong> pour l'ensemble du projet.
+        <div class="soncase-chips">
+          <span class="sc sc-O">Orgueil</span>
+          <span class="sc sc-S">Securite</span>
+          <span class="sc sc-C">Confort</span>
+        </div>
+      </div>
+    </div>
+    <div class="info-box ib-tip">Mobile principal ORGUEIL : Isabelle recoit regulierement. Elle veut une terrasse qui fasse impression, qui ressemble a "un magazine" de decoration. Elle a des inspirations Pinterest.</div>
+  </div>
+
+  <div class="sit-badge sit1">📋 Situation 1 — Vente de la solution</div>
+  <div class="card card-green">
+    <div class="card-title">🎯 La mission d'Alyanna — Situation 1</div>
+    <div class="step-list">
+      <div class="step-item"><div class="step-num" style="background:var(--green)">1</div><div class="step-content"><h4>Decouverte</h4><p>Confirmer les dimensions, l'usage (reception), l'exposition soleil, les contraintes (evacuation eau de pluie, pente minimale 1%).</p></div></div>
+      <div class="step-item"><div class="step-num" style="background:var(--green)">2</div><div class="step-content"><h4>Proposition revetement</h4><ul><li>Carrelage exterieur gres cerame R11 60×60 cm — antiderapant classe R11</li><li>Pente d'ecoulement 1 cm/ml minimum</li><li>Colle C2 flex pour exterieur</li><li>Joint exterieur large jointement souple</li><li>Profil de rive aluminium anodise</li></ul></div></div>
+      <div class="step-item"><div class="step-num" style="background:var(--green)">3</div><div class="step-content"><h4>Proposition pergola bioclimatique</h4><ul><li>Pergola aluminium bioclimatique 4×3 m — lames orientables</li><li>Option LED integre</li><li>Option capteur pluie (fermeture automatique)</li></ul></div></div>
+      <div class="step-item"><div class="step-num" style="background:var(--green)">4</div><div class="step-content"><h4>Ventes additionnelles</h4><ul><li>Mobilier de jardin — table + 6 chaises resine tressee</li><li>Grandes jardinières + substrat + plantes tropicales locales</li><li>Eclairage exterieur solaire LED</li><li>EPI pour la pose client</li></ul></div></div>
+      <div class="step-item"><div class="step-num" style="background:var(--green)">5</div><div class="step-content"><h4>Services associes</h4><ul><li>Livraison materiaux sur place</li><li>Mise en relation carreleur partenaire</li><li>Installation pergola par equipe technique</li><li>Financement 24 mois possible</li></ul></div></div>
+    </div>
+  </div>
+
+  <div class="sit-badge sit2">📐 Situation 2 — Calculs</div>
+  <div class="card card-blue">
+    <div class="card-title">🧮 Donnees terrasse</div>
+    <div class="g2">
+      <div class="info-box ib-blue" style="margin-bottom:0"><strong>Surface terrasse :</strong> 7 m × 4 m = <strong>28 m²</strong><br><strong>Format carrelage :</strong> 60×60 cm<br><strong>Coeff. chute :</strong> 10%<br><strong>Pente :</strong> 1 cm/ml obligatoire exterieur</div>
+      <div class="info-box ib-blue" style="margin-bottom:0"><strong>Pergola :</strong> 4 m × 3 m = 12 m² couverts<br><strong>Pose terrasse :</strong> ~35 €/m²<br><strong>Pose pergola :</strong> forfait ~800 €<br><strong>TVA :</strong> 8,5%</div>
+    </div>
+  </div>
+
+  <div class="card card-blue">
+    <div class="card-title">📊 Calcul 1 — Carrelage exterieur</div>
+    <div style="overflow-x:auto"><table class="calc-table">
+      <thead><tr><th>Etape</th><th>Calcul</th><th class="num">Resultat</th></tr></thead>
+      <tbody>
+        <tr><td>Surface terrasse</td><td class="formula">7 × 4 m</td><td class="num"><strong>28 m²</strong></td></tr>
+        <tr><td>+ 10% chute (coupes d'angle, joints)</td><td class="formula">28 × 1,10</td><td class="num"><strong>30,8 m²</strong></td></tr>
+        <tr><td>A commander</td><td class="formula">Arrondi → boites de 1,44 m² (4 carreaux 60×60)</td><td class="num"><strong>22 boites</strong></td></tr>
+        <tr class="subtotal-row"><td>Carrelage gres cerame R11 60×60</td><td class="formula">30,8 m² × 32,00 € HT/m²</td><td class="num"><strong>985,60 € HT</strong></td></tr>
+        <tr><td>Colle C2 flex (sac 25 kg — 4 m²/sac)</td><td class="formula">28 m² ÷ 4 = 7 sacs</td><td class="num">7 sacs</td></tr>
+        <tr class="subtotal-row"><td>Colle C2 flex exterieur</td><td class="formula">7 sacs × 18,00 € HT</td><td class="num"><strong>126,00 € HT</strong></td></tr>
+        <tr><td>Joint souple exterieur (sac 5 kg — 8 m²/sac)</td><td class="formula">28 m² ÷ 8 = 3,5 → 4 sacs</td><td class="num">4 sacs</td></tr>
+        <tr class="subtotal-row"><td>Jointement souple</td><td class="formula">4 sacs × 14,00 € HT</td><td class="num"><strong>56,00 € HT</strong></td></tr>
+        <tr><td>Profil de rive aluminium (ml perimetre)</td><td class="formula">(7+4) × 2 = 22 ml − 1 acces = 19 ml</td><td class="num">19 ml</td></tr>
+        <tr class="subtotal-row"><td>Profil alu anodise</td><td class="formula">19 ml × 8,50 € HT</td><td class="num"><strong>161,50 € HT</strong></td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="card card-blue">
+    <div class="card-title">📊 Devis total terrasse + pergola</div>
+    <div style="overflow-x:auto"><table class="calc-table">
+      <thead><tr><th>Designation</th><th class="num">Total HT</th></tr></thead>
+      <tbody>
+        <tr><td>Carrelage gres cerame R11 60×60 (30,8 m²)</td><td class="num">985,60 €</td></tr>
+        <tr><td>Colle C2 flex exterieur (7 sacs)</td><td class="num">126,00 €</td></tr>
+        <tr><td>Jointement souple (4 sacs)</td><td class="num">56,00 €</td></tr>
+        <tr><td>Profil de rive aluminium (19 ml)</td><td class="num">161,50 €</td></tr>
+        <tr class="subtotal-row"><td><strong>SOUS-TOTAL Revetement HT</strong></td><td class="num"><strong>1 329,10 €</strong></td></tr>
+        <tr><td>Pergola bioclimatique aluminium 4×3 m</td><td class="num">3 200,00 €</td></tr>
+        <tr><td>Option LED integre pergola</td><td class="num">320,00 €</td></tr>
+        <tr><td>Option capteur pluie automatique</td><td class="num">180,00 €</td></tr>
+        <tr class="subtotal-row"><td><strong>SOUS-TOTAL Pergola HT</strong></td><td class="num"><strong>3 700,00 €</strong></td></tr>
+        <tr><td>Pose carrelage (35 €/m²)</td><td class="num">980,00 €</td></tr>
+        <tr><td>Pose pergola (forfait)</td><td class="num">800,00 €</td></tr>
+        <tr><td>Mobilier (table + 6 chaises)</td><td class="num">680,00 €</td></tr>
+        <tr><td>Jardinières + substrat + plantes (3 grands)</td><td class="num">210,00 €</td></tr>
+        <tr><td>Livraison materiaux</td><td class="num">89,00 €</td></tr>
+        <tr class="subtotal-row"><td><strong>TOTAL HT</strong></td><td class="num"><strong>7 788,10 €</strong></td></tr>
+        <tr class="subtotal-row"><td>TVA 8,5%</td><td class="num">661,99 €</td></tr>
+        <tr class="total-row"><td><strong>TOTAL TTC</strong></td><td class="num"><strong>8 450,09 €</strong></td></tr>
+      </tbody>
+    </table></div>
+    <div class="info-box ib-tip" style="margin-top:1rem">Le devis est legerement au-dessus du budget (8 450 € vs 8 000 €). Alyanna doit proposer un ajustement : supprimer l'option capteur pluie (−180 € HT soit −195 € TTC) ou proposer le mobilier en version plus accessible. Total ajuste possible : ~8 260 € TTC → dans le budget avec negociation sur le mobilier.</div>
+  </div>
+
+  <div class="card card-gold">
+    <div class="card-title">📋 Grille officielle — Criteres evalues</div>
+    <div style="overflow-x:auto"><table class="grille-offic">
+      <thead><tr><th>Critere officiel</th><th>TI</th><th>I</th><th>S</th><th>TS</th></tr></thead>
+      <tbody>
+        <tr class="section-row"><td colspan="5">Situation 1</td></tr>
+        <tr><td>Connaissance carrelage exterieur R11 et pergola bioclimatique</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td></tr>
+        <tr><td>Argumentation mobile ORGUEIL (espace de reception premium)</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td></tr>
+        <tr><td>Conseil antiderapant R11, pente ecoulement, options pergola</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td></tr>
+        <tr><td>Qualite communication, accueil, mobilier + plantes proposes</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td></tr>
+        <tr><td>Finalisation : devis, pose partenaire, financement, livraison</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td></tr>
+        <tr><td>Auto-analyse de la prestation</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td></tr>
+        <tr class="section-row"><td colspan="5">Situation 2</td></tr>
+        <tr><td>Calcul correct surface + chute carrelage (30,8 m²)</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td></tr>
+        <tr><td>Quantites colle et joint exactes</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td></tr>
+        <tr><td>Devis complet avec pergola, pose, mobilier, TVA 8,5%</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td></tr>
+        <tr><td>Gestion budget (ajustement propose si depassement)</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td></tr>
+        <tr><td>Respect contraintes (pente ecoulement, antiderapant)</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td></tr>
+        <tr><td>EPI proposes, reglementation mention</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     ADELE — GROSSISTE ALUMINIUM
+══════════════════════════════════════════ -->
+<div class="view" id="view-adele">
+  <div class="candidate-hero">
+    <div class="candidate-topbar" style="background:linear-gradient(135deg,#3a006a,#600090)">
+      <div><h2>🔩 Adele</h2><p>Negoce aluminium — Composants menuiserie professionnelle</p></div>
+      <span class="officiel-badge">CCF E2 — Session 2026</span>
+    </div>
+  </div>
+
+  <div class="card card-purple">
+    <div class="card-title">🏪 Contexte entreprise</div>
+    <p style="font-size:0.85rem;line-height:1.75;color:var(--text2)">Le grossiste aluminium fournit les artisans fabricants de menuiseries (fenetres, portes, verandas). Il commercialise des profiles, joints EPDM, quincaillerie de pose et vitrages. Adele est la commerciale sedentaire — elle prend les commandes, etablit les devis et gere les livraisons. La clientele est exclusivement professionnelle. TVA Reunion : <strong>8,5%</strong>.</p>
+  </div>
+
+  <div class="card" style="border-left:4px solid var(--purple)">
+    <div class="card-title">👤 Profil du client</div>
+    <div class="client-profile">
+      <div class="client-name">M. Benard — Christophe, 44 ans</div>
+      <div class="client-job">Artisan fabricant menuiseries alu — 3 ouvriers — Saint-Louis</div>
+      <div class="client-desc">
+        Christophe est un client regulier depuis 4 ans. Il vient passer une commande pour <strong>3 chantiers distincts</strong> en cours. Chantier A : villa neuve a Cilaos — <strong>8 fenetres coulissantes 120×120 cm</strong>. Chantier B : renovation appartement — <strong>4 portes-fenetres 90×215 cm</strong>. Chantier C : veranda 15 m² — profiles specifiques veranda. Il signale que sa derniere livraison (il y a 3 semaines) comportait <strong>2 profiles tordus</strong> qui lui ont fait perdre une demi-journee. Il souhaite un geste commercial et veut negocier ses tarifs car un concurrent lui a propose <strong>8% de remise</strong>. Sa commande totale represente environ <strong>3 800 euros HT</strong>.
+        <div class="soncase-chips">
+          <span class="sc sc-A">Argent</span>
+          <span class="sc sc-S">Securite</span>
+        </div>
+      </div>
+    </div>
+    <div class="info-box ib-warn">Situation sensible : client fidele mecontente par un incident qualite + pression concurrentielle. Adele doit gerer la reclamation, valoriser la relation et trouver un accord commercial equitable.</div>
+  </div>
+
+  <div class="sit-badge sit1">📋 Situation 1 — Vente et gestion relation client pro</div>
+  <div class="card" style="border-left:4px solid var(--purple)">
+    <div class="card-title">🎯 La mission d'Adele — Situation 1</div>
+    <div class="step-list">
+      <div class="step-item"><div class="step-num" style="background:var(--purple)">1</div><div class="step-content"><h4>Accueil & ecoute de la reclamation</h4><p>Laisser Christophe exprimer son mecontentement. Reformuler. Ne pas minimiser. Prendre note. S'engager a faire remonter.</p></div></div>
+      <div class="step-item"><div class="step-num" style="background:var(--purple)">2</div><div class="step-content"><h4>Traitement de l'objection qualite</h4><p>Reconnaitre l'incident. Proposer un avoir sur la prochaine commande (geste commercial) ou une remise ponctuelle. Annoncer un controle qualite renfforce a la prochaine livraison.</p></div></div>
+      <div class="step-item"><div class="step-num" style="background:var(--purple)">3</div><div class="step-content"><h4>Proposition commerciale face a la concurrence</h4><ul><li>Verifier le volume de la commande : 3 800 € HT — seuil remise degressif possible</li><li>Proposer 5% de remise sur la commande du jour (vs 8% concurrent)</li><li>Valoriser les avantages differenciateurs : delais confirmes, SAV local, relation 4 ans</li></ul></div></div>
+      <div class="step-item"><div class="step-num" style="background:var(--purple)">4</div><div class="step-content"><h4>Prise de commande complete</h4><ul><li>Chantier A : profiles fenetres coulissantes 120×120 cm × 8</li><li>Chantier B : profiles portes-fenetres 90×215 cm × 4</li><li>Chantier C : profiles veranda 15 m²</li><li>Joints EPDM, visserie, pattes de fixation pour chaque chantier</li></ul></div></div>
+      <div class="step-item"><div class="step-num" style="background:var(--purple)">5</div><div class="step-content"><h4>Services associes</h4><ul><li>Livraison prioritaire sous 48h (urgence chantiers)</li><li>Bon de livraison detaille avec controle qualite</li><li>Compte mensuel : paiement 30 jours fin de mois</li><li>Contact direct Adele pour les urgences</li></ul></div></div>
+    </div>
+  </div>
+
+  <div class="sit-badge sit2">📐 Situation 2 — Calcul de commande et remise commerciale</div>
+
+  <div class="card card-blue">
+    <div class="card-title">📊 Calcul chantier A — 8 fenetres coulissantes 120×120 cm</div>
+    <div style="overflow-x:auto"><table class="calc-table">
+      <thead><tr><th>Designation</th><th class="num">Qte</th><th class="num">PU HT</th><th class="num">Total HT</th></tr></thead>
+      <tbody>
+        <tr><td>Profile cadre coulissant 6 m (1 barre = 2 cadres + debord)</td><td class="num">16 barres</td><td class="num">12,50 €</td><td class="num">200,00 €</td></tr>
+        <tr><td>Profile ouvrant coulissant 6 m</td><td class="num">12 barres</td><td class="num">11,00 €</td><td class="num">132,00 €</td></tr>
+        <tr><td>Joint EPDM perimetre fenetre (ml)</td><td class="num">8 × 4,8 m = 39 ml</td><td class="num">1,20 €</td><td class="num">46,80 €</td></tr>
+        <tr><td>Galets de roulement (jeu/fenetre)</td><td class="num">8 jeux</td><td class="num">8,50 €</td><td class="num">68,00 €</td></tr>
+        <tr><td>Poignees + condamnation (par fenetre)</td><td class="num">8 jeux</td><td class="num">12,00 €</td><td class="num">96,00 €</td></tr>
+        <tr class="subtotal-row"><td colspan="3"><strong>Sous-total chantier A</strong></td><td class="num"><strong>542,80 €</strong></td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="card card-blue">
+    <div class="card-title">📊 Calcul chantier B — 4 portes-fenetres 90×215 cm</div>
+    <div style="overflow-x:auto"><table class="calc-table">
+      <thead><tr><th>Designation</th><th class="num">Qte</th><th class="num">PU HT</th><th class="num">Total HT</th></tr></thead>
+      <tbody>
+        <tr><td>Profile dormant PF 6 m</td><td class="num">8 barres</td><td class="num">13,50 €</td><td class="num">108,00 €</td></tr>
+        <tr><td>Profile ouvrant PF 6 m</td><td class="num">6 barres</td><td class="num">12,00 €</td><td class="num">72,00 €</td></tr>
+        <tr><td>Joint EPDM (ml)</td><td class="num">4 × 6,1 m = 25 ml</td><td class="num">1,20 €</td><td class="num">30,00 €</td></tr>
+        <tr><td>Charnières 3D (3 par ouvrant)</td><td class="num">4 × 3 = 12</td><td class="num">6,50 €</td><td class="num">78,00 €</td></tr>
+        <tr><td>Serrure multipoints (par porte)</td><td class="num">4</td><td class="num">38,00 €</td><td class="num">152,00 €</td></tr>
+        <tr><td>Seuil aluminium anodise (ml)</td><td class="num">4 × 0,90 m</td><td class="num">22,00 €</td><td class="num">79,20 €</td></tr>
+        <tr class="subtotal-row"><td colspan="3"><strong>Sous-total chantier B</strong></td><td class="num"><strong>519,20 €</strong></td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="card card-blue">
+    <div class="card-title">📊 Calcul chantier C — Veranda 15 m² (profiles perimetre)</div>
+    <div style="overflow-x:auto"><table class="calc-table">
+      <thead><tr><th>Designation</th><th class="num">Qte</th><th class="num">PU HT</th><th class="num">Total HT</th></tr></thead>
+      <tbody>
+        <tr><td>Profile pied de veranda 6 m</td><td class="num">5 barres</td><td class="num">18,00 €</td><td class="num">90,00 €</td></tr>
+        <tr><td>Profile faitage 6 m</td><td class="num">3 barres</td><td class="num">22,00 €</td><td class="num">66,00 €</td></tr>
+        <tr><td>Profile chevron 6 m</td><td class="num">8 barres</td><td class="num">16,50 €</td><td class="num">132,00 €</td></tr>
+        <tr><td>Connecteurs et angles (lot)</td><td class="num">2 lots</td><td class="num">45,00 €</td><td class="num">90,00 €</td></tr>
+        <tr><td>Joint d'etancheite toiture (rouleau 10 m)</td><td class="num">3 rouleaux</td><td class="num">28,00 €</td><td class="num">84,00 €</td></tr>
+        <tr class="subtotal-row"><td colspan="3"><strong>Sous-total chantier C</strong></td><td class="num"><strong>462,00 €</strong></td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="card card-blue">
+    <div class="card-title">📊 Devis total — Calcul remise et TTC</div>
+    <div style="overflow-x:auto"><table class="calc-table">
+      <thead><tr><th>Poste</th><th class="num">Total HT</th></tr></thead>
+      <tbody>
+        <tr><td>Chantier A — 8 fenetres coulissantes</td><td class="num">542,80 €</td></tr>
+        <tr><td>Chantier B — 4 portes-fenetres</td><td class="num">519,20 €</td></tr>
+        <tr><td>Chantier C — veranda profiles</td><td class="num">462,00 €</td></tr>
+        <tr><td>Visserie et accessoires divers (forfait)</td><td class="num">120,00 €</td></tr>
+        <tr class="subtotal-row"><td><strong>SOUS-TOTAL HT brut</strong></td><td class="num"><strong>1 644,00 €</strong></td></tr>
+        <tr><td style="color:var(--red)">Avoir incident qualite 2 profiles tordus (geste commercial)</td><td class="num" style="color:var(--red)">- 25,00 €</td></tr>
+        <tr><td style="color:var(--red)">Remise commerciale 5% (fidélite + volume)</td><td class="num" style="color:var(--red)">- 82,20 €</td></tr>
+        <tr class="subtotal-row"><td><strong>TOTAL HT net</strong></td><td class="num"><strong>1 536,80 €</strong></td></tr>
+        <tr class="subtotal-row"><td>TVA 8,5%</td><td class="num">130,63 €</td></tr>
+        <tr class="total-row"><td><strong>TOTAL TTC</strong></td><td class="num"><strong>1 667,43 €</strong></td></tr>
+      </tbody>
+    </table></div>
+    <div class="info-box ib-green" style="margin-top:1rem">Remise de 5% vs 8% proposee par le concurrent : Adele doit argumenter sur la valeur differenciante — relation 4 ans, SAV local, livraison sous 48h, interlocuteur direct — pour justifier l'ecart de 3% (~50 € sur cette commande).</div>
+  </div>
+
+  <div class="card card-gold">
+    <div class="card-title">📋 Grille officielle</div>
+    <div style="overflow-x:auto"><table class="grille-offic">
+      <thead><tr><th>Critere officiel</th><th>TI</th><th>I</th><th>S</th><th>TS</th></tr></thead>
+      <tbody>
+        <tr class="section-row"><td colspan="5">Situation 1</td></tr>
+        <tr><td>Connaissance profiles, joints, quincaillerie menuiserie alu</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td></tr>
+        <tr><td>Argumentation : valeur relationnelle vs remise concurrente</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td></tr>
+        <tr><td>Gestion reclamation : ecoute, reconnaissance, geste commercial</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td></tr>
+        <tr><td>Communication pro B2B : posture commerciale, ecoute active</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td></tr>
+        <tr><td>Finalisation : commande complete, delai 48h, compte mensuel</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td></tr>
+        <tr><td>Auto-analyse prestation</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td></tr>
+        <tr class="section-row"><td colspan="5">Situation 2</td></tr>
+        <tr><td>Calcul correct chantier A (profiles, joints, quincaillerie)</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td></tr>
+        <tr><td>Calcul correct chantier B (portes-fenetres, serrure, seuil)</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td></tr>
+        <tr><td>Calcul correct chantier C (profiles veranda)</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td></tr>
+        <tr><td>Remise calculee correctement (5% sur total HT)</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td></tr>
+        <tr><td>Avoir incident inclus, TVA 8,5% appliquee</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td></tr>
+        <tr><td>Respect contraintes (delai 48h, compte mensuel)</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     KYRANN — AGENCEMENT SUR-MESURE — DRESSING
+══════════════════════════════════════════ -->
+<div class="view" id="view-kyrann">
+  <div class="candidate-hero">
+    <div class="candidate-topbar" style="background:linear-gradient(135deg,#602000,#a04020)">
+      <div><h2>🪚 Kyrann</h2><p>Agencement sur-mesure — Dressing, cuisine, menuiserie interieure</p></div>
+      <span class="officiel-badge">CCF E2 — Session 2026</span>
+    </div>
+  </div>
+
+  <div class="card card-accent">
+    <div class="card-title">🏪 Contexte entreprise</div>
+    <p style="font-size:0.85rem;line-height:1.75;color:var(--text2)">L'atelier d'agencement sur-mesure fabrique et pose des dressings, cuisines, bibliothèques et meubles sur-mesure. La fabrication est realisee en atelier (CNC, debit, plaquage). Kyrann est a la fois conseiller commercial et chef de projet. Il realise les plans, chiffre et suit la pose. TVA Reunion : <strong>8,5%</strong>.</p>
+  </div>
+
+  <div class="card card-accent">
+    <div class="card-title">👤 Profil du client</div>
+    <div class="client-profile">
+      <div class="client-name">Mme Ah-Fat — Priscilla, 37 ans</div>
+      <div class="client-job">Infirmiere — Couple avec 2 enfants — Maison individuelle Saint-Pierre</div>
+      <div class="client-desc">
+        Priscilla vient de faire construire sa maison. La chambre parentale fait <strong>4,2 m × 3,8 m</strong>. Elle souhaite un <strong>dressing sur-mesure</strong> dans l'espace dedie de la chambre : un renfoncement de <strong>2,60 m de large × 2,20 m de hauteur × 0,65 m de profondeur</strong>. Besoins specifiques : une grande penderie pour robes longues (elle est infirmiere et a beaucoup d'uniformes), des etageres pour chaussures (nombreuses), des tiroirs pour accessoires et lingerie, et un espace pour son compagnon. Elle veut un miroir en facade. <strong>Budget : 1 800 euros TTC</strong> maximum. Elle a vu des dressings en kit chez un concurrent a 900 euros mais prefer le sur-mesure si ca reste dans son budget.
+        <div class="soncase-chips">
+          <span class="sc sc-C">Confort</span>
+          <span class="sc sc-O">Orgueil</span>
+          <span class="sc sc-A">Argent</span>
+        </div>
+      </div>
+    </div>
+    <div class="info-box ib-tip">Mobile principal CONFORT : elle rentre fatiguee de nuit. Le matin, elle a besoin de retrouver ses vetements sans chercher. L'organisation parfaite du dressing est sa priorite absolue. Le beau vient en second.</div>
+  </div>
+
+  <div class="sit-badge sit1">📋 Situation 1 — Vente de la solution</div>
+  <div class="card card-accent">
+    <div class="card-title">🎯 La mission de Kyrann — Situation 1</div>
+    <div class="step-list">
+      <div class="step-item"><div class="step-num" style="background:var(--accent)">1</div><div class="step-content"><h4>Decouverte & diagnostic</h4><ul><li>Confirmer les dimensions du renfoncement</li><li>Inventaire des besoins : robes longues (min 150 cm hauteur libre), chaussures (combien de paires ?), tiroirs, espace compagnon</li><li>Verifier la hauteur sous plafond effective</li></ul></div></div>
+      <div class="step-item"><div class="step-num" style="background:var(--accent)">2</div><div class="step-content"><h4>Proposition dressing sur-mesure</h4><ul><li>Corps de dressing melamine blanc 18 mm — 3 colonnes de 86 cm</li><li>Colonne 1 (gauche) : penderie robes longues pleine hauteur + barre de suspension</li><li>Colonne 2 (centre) : etageres chaussures reglables (10 paires/colonne) + tiroirs bas (2)</li><li>Colonne 3 (droite) : espace compagnon — penderie courte + etageres</li><li>Facade : portes coulissantes avec miroir pleine hauteur</li><li>Eclairage LED automatique integre</li></ul></div></div>
+      <div class="step-item"><div class="step-num" style="background:var(--accent)">3</div><div class="step-content"><h4>Argumentaire CAB centre sur le Confort</h4><p>CAB pour la penderie robes longues : Caracteristique = hauteur libre 190 cm / Avantage = robes non froissees / Benefice = gain de temps le matin, uniformes impeccables pour le travail.</p></div></div>
+      <div class="step-item"><div class="step-num" style="background:var(--accent)">4</div><div class="step-content"><h4>Ventes additionnelles</h4><ul><li>Separateurs de tiroirs pour accessoires et lingerie</li><li>Boites de rangement en tissu pour etageres hautes</li><li>Cinq barre(s) de suspension supplementaire</li><li>Miroir de sol complementaire</li></ul></div></div>
+      <div class="step-item"><div class="step-num" style="background:var(--accent)">5</div><div class="step-content"><h4>Services et avantages sur-mesure vs kit</h4><ul><li>Plan 3D avant fabrication — offert</li><li>Pose comprise dans le prix — poseur Kyrann ou equipe atelier</li><li>Garantie 2 ans pieces + main d'oeuvre</li><li>Financement 12 mois possible</li></ul></div></div>
+    </div>
+    <div class="info-box ib-green" style="margin-top:0.5rem">Argument cle vs kit concurrent : le sur-mesure exploite CHAQUE centimetre de l'alcove — pas de perte laterale. Le kit laisse des espaces inutilisables sur les cotes. Et la pose est incluse dans le prix.</div>
+  </div>
+
+  <div class="sit-badge sit2">📐 Situation 2 — Plan & calcul du dressing</div>
+
+  <div class="card card-blue">
+    <div class="card-title">🧮 Dimensions et configuration</div>
+    <div class="g2">
+      <div class="info-box ib-blue" style="margin-bottom:0"><strong>Alcove :</strong> 2,60 m L × 2,20 m H × 0,65 m P<br><strong>3 colonnes :</strong> 86 cm + 88 cm + 86 cm = 2,60 m<br><strong>Epaisseur panneau :</strong> 18 mm<br><strong>Separations interieures :</strong> 4 panneaux</div>
+      <div class="info-box ib-blue" style="margin-bottom:0"><strong>Panneaux melamine :</strong> 18 mm<br><strong>Portes coulissantes :</strong> 2 vantaux 130×220 cm<br><strong>Systeme rail :</strong> coulissant simple<br><strong>TVA :</strong> 8,5%</div>
+    </div>
+  </div>
+
+  <div class="card card-blue">
+    <div class="card-title">📊 Calcul — Metrage panneaux et composants</div>
+    <div style="overflow-x:auto"><table class="calc-table">
+      <thead><tr><th>Element</th><th>Dimensions</th><th class="num">Qte</th><th class="num">PU HT</th><th class="num">Total HT</th></tr></thead>
+      <tbody>
+        <tr><td>Joues laterales (panneaux cotes)</td><td>2,20 m H × 0,65 m P</td><td class="num">2</td><td class="num">48,00 €</td><td class="num">96,00 €</td></tr>
+        <tr><td>Planches de separation (etageres + niveaux)</td><td>0,65 m P × 86/88 cm L</td><td class="num">12</td><td class="num">22,00 €</td><td class="num">264,00 €</td></tr>
+        <tr><td>Fond de dressing (MDF 10 mm)</td><td>2,60 m × 2,20 m</td><td class="num">1 lot</td><td class="num">85,00 €</td><td class="num">85,00 €</td></tr>
+        <tr><td>Tiroirs complets avec coulisses soft-close (2 par colonne 2)</td><td>Largeur 86 cm</td><td class="num">2</td><td class="num">65,00 €</td><td class="num">130,00 €</td></tr>
+        <tr><td>Barres de suspension inox (colonne 1 + colonne 3)</td><td>80 cm</td><td class="num">4</td><td class="num">18,00 €</td><td class="num">72,00 €</td></tr>
+        <tr><td>Portes coulissantes miroir 130×220 cm (2 vantaux)</td><td>130 × 220 cm</td><td class="num">2</td><td class="num">185,00 €</td><td class="num">370,00 €</td></tr>
+        <tr><td>Rail coulissant aluminium 260 cm (haut + bas)</td><td>2,60 m</td><td class="num">2</td><td class="num">35,00 €</td><td class="num">70,00 €</td></tr>
+        <tr><td>LED strip automatique + capteur ouverture</td><td>2,60 ml</td><td class="num">1</td><td class="num">48,00 €</td><td class="num">48,00 €</td></tr>
+        <tr><td>Fixations, chevilles, visserie</td><td>lot</td><td class="num">1</td><td class="num">18,00 €</td><td class="num">18,00 €</td></tr>
+        <tr class="subtotal-row"><td colspan="4"><strong>SOUS-TOTAL Fournitures HT</strong></td><td class="num"><strong>1 153,00 €</strong></td></tr>
+        <tr><td>Main-d'oeuvre pose (Kyrann — demi-journee)</td><td>4 heures</td><td class="num">1</td><td class="num">280,00 €</td><td class="num">280,00 €</td></tr>
+        <tr class="subtotal-row"><td colspan="4"><strong>TOTAL HT</strong></td><td class="num"><strong>1 433,00 €</strong></td></tr>
+        <tr class="subtotal-row"><td colspan="4">TVA 8,5%</td><td class="num">121,81 €</td></tr>
+        <tr class="total-row"><td colspan="4"><strong>TOTAL TTC</strong></td><td class="num"><strong>1 554,81 €</strong></td></tr>
+      </tbody>
+    </table></div>
+    <div class="info-box ib-green" style="margin-top:1rem">Le devis est a <strong>1 555 € TTC</strong> — bien en dessous du budget de 1 800 € TTC. Marge de 245 € pour proposer les accessoires (separateurs de tiroirs ~45 €, boites de rangement ~60 €, plan 3D offert). Total avec additionnels ~1 660 € TTC — reste dans le budget.</div>
+    <div class="info-box ib-tip" style="margin-top:0.5rem">Argument vs kit 900 € concurrent : le kit ne couvrira jamais une alcove de 2,60 m exactement. Il faudra combler les vides. Le sur-mesure Kyrann = utilisation totale de l'espace + pose incluse + garantie 2 ans + miroir portes coulissantes. Ecart justifie.</div>
+  </div>
+
+  <div class="card card-gold">
+    <div class="card-title">📋 Grille officielle</div>
+    <div style="overflow-x:auto"><table class="grille-offic">
+      <thead><tr><th>Critere officiel</th><th>TI</th><th>I</th><th>S</th><th>TS</th></tr></thead>
+      <tbody>
+        <tr class="section-row"><td colspan="5">Situation 1</td></tr>
+        <tr><td>Connaissance technique (panneaux, coulisses soft-close, rail miroir)</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td></tr>
+        <tr><td>Argumentation CONFORT adaptee (infirmiere, gain de temps matin)</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td></tr>
+        <tr><td>Conseil organisation dressing (zones distinctes, penderie robes longues)</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td></tr>
+        <tr><td>Qualite communication (plan 3D offert, valorisation sur-mesure vs kit)</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td></tr>
+        <tr><td>Finalisation (devis dans budget, accessoires additionnels, garantie)</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td></tr>
+        <tr><td>Auto-analyse prestation</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td></tr>
+        <tr class="section-row"><td colspan="5">Situation 2</td></tr>
+        <tr><td>Configuration 3 colonnes adaptee aux dimensions (2,60 m)</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td></tr>
+        <tr><td>Calcul panneaux, tiroirs, barres, rails corrects</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td></tr>
+        <tr><td>Devis complet (fournitures + pose + TVA 8,5%)</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td></tr>
+        <tr><td>Total dans le budget client (1 555 € &lt; 1 800 €)</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td></tr>
+        <tr><td>Prise en compte remarque client (sur-mesure vs kit argumente)</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td></tr>
+        <tr><td>Respect reglementation (fixation murale securisee, EPI mention)</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td><td class="check-td">□</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</div>
+
+</div><!-- fin .main -->
+
+<script>
+function showView(id) {
+  document.querySelectorAll('.view').forEach(function(v) { v.classList.remove('active'); });
+  document.querySelectorAll('.mode-btn').forEach(function(b) { b.classList.remove('active'); });
+  var el = document.getElementById('view-' + id);
+  if (el) el.classList.add('active');
+  document.querySelectorAll('.mode-btn').forEach(function(b) {
+    if (b.getAttribute('onclick') && b.getAttribute('onclick').indexOf(id) !== -1) b.classList.add('active');
+  });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
