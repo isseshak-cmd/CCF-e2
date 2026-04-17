@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Epreuve E2 — Vendredi — Kyllian · Alyanna · Adele · Kyrann</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f6f3ee;
+  --surface: #ffffff;
+  --surface2: #f0ece4;
+  --border: #ddd5c5;
+  --border2: #c5b8a0;
+  --text: #1a1510;
+  --text2: #6a5a45;
+  --text3: #9a8a72;
+  --accent: #b84000;
+  --accent-dim: rgba(184,64,0,0.1);
+  --blue: #0048b0;
+  --blue-dim: rgba(0,72,176,0.1);
+  --green: #006030;
+  --green-dim: rgba(0,96,48,0.1);
+  --red: #b80020;
+  --red-dim: rgba(184,0,32,0.1);
+  --gold: #b88000;
+  --gold-dim: rgba(184,128,0,0.1);
+  --purple: #600090;
+  --purple-dim: rgba(96,0,144,0.1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+
+.header{background:var(--text);color:#f6f3ee;padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.8rem;}
+.header-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.05rem;}
+.header-logo span{color:#d4824a;}
+.header-info{font-size:0.73rem;opacity:0.5;text-align:right;line-height:1.6;}
+
+.mode-bar{background:var(--surface);border-bottom:2px solid var(--border);padding:0.6rem 2rem;display:flex;gap:0.4rem;align-items:center;flex-wrap:wrap;position:sticky;top:0;z-index:100;}
+.mode-label{font-size:0.75rem;font-weight:700;color:var(--text3);margin-right:0.2rem;}
+.mode-btn{padding:0.4rem 0.9rem;border-radius:999px;border:1.5px solid var(--border);font-family:'DM Sans',sans-serif;font-size:0.8rem;font-weight:600;cursor:pointer;background:var(--surface);color:var(--text2);transition:all 0.15s;}
+.mode-btn:hover{border-color:var(--accent);color:var(--accent);}
+.mode-btn.active{background:var(--accent);border-color:var(--accent);color:#fff;}
+.mode-btn.jury-btn{border-color:var(--blue);color:var(--blue);}
+.mode-btn.jury-btn.active{background:var(--blue);color:#fff;}
+.mode-sep{width:1px;height:20px;background:var(--border2);margin:0 0.3rem;}
+
+.main{padding:2rem;max-width:960px;margin:0 auto;}
+.view{display:none;}
+.view.active{display:block;animation:fadeUp 0.2s ease;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+
+/* CANDIDATE HERO */
+.candidate-hero{border-radius:14px;overflow:hidden;margin-bottom:1.4rem;box-shadow:0 4px 20px rgba(26,21,16,0.15);}
+.hero-top{padding:1.2rem 1.5rem;color:#fff;display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:0.8rem;}
+.hero-top h2{font-family:'Syne',sans-serif;font-weight:800;font-size:1.15rem;}
+.hero-top p{font-size:0.8rem;opacity:0.65;margin-top:0.2rem;}
+.badge{background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.3);color:#fff;font-size:0.68rem;font-weight:700;padding:3px 10px;border-radius:999px;text-transform:uppercase;letter-spacing:0.08em;}
+.badge-red{background:rgba(184,0,32,0.2);border:1px solid rgba(255,100,100,0.4);color:#ffaaaa;}
+.badge-gold{background:rgba(184,128,0,0.2);border:1px solid rgba(255,200,0,0.4);color:#ffe080;}
+
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.2rem;margin-bottom:1rem;box-shadow:0 1px 6px rgba(26,21,16,0.05);}
+.card-title{font-family:'Syne',sans-serif;font-size:0.9rem;font-weight:800;margin-bottom:0.8rem;display:flex;align-items:center;gap:0.5rem;}
+.bl-accent{border-left:4px solid var(--accent);}
+.bl-blue{border-left:4px solid var(--blue);}
+.bl-green{border-left:4px solid var(--green);}
+.bl-purple{border-left:4px solid var(--purple);}
+.bl-gold{border-left:4px solid var(--gold);}
+.bl-red{border-left:4px solid var(--red);}
+
+/* SITUATION BADGE */
+.sit-badge{display:inline-flex;align-items:center;gap:0.4rem;padding:3px 10px;border-radius:999px;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:0.7rem;}
+.s1{background:var(--accent-dim);color:var(--accent);border:1px solid rgba(184,64,0,0.2);}
+.s2{background:var(--blue-dim);color:var(--blue);border:1px solid rgba(0,72,176,0.2);}
+
+/* CLIENT CARD */
+.client-box{background:var(--surface2);border-radius:10px;padding:1.1rem 1.2rem;margin-bottom:0.9rem;}
+.client-name{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;margin-bottom:0.15rem;}
+.client-job{font-size:0.8rem;color:var(--text2);margin-bottom:0.7rem;}
+.client-text{font-size:0.86rem;line-height:1.75;color:var(--text2);}
+.client-text strong{color:var(--text);}
+
+/* DONNEES BOX */
+.data-box{background:var(--surface2);border-radius:9px;padding:0.9rem 1rem;font-size:0.85rem;line-height:1.8;margin-bottom:0.7rem;}
+.data-box strong{color:var(--text);font-weight:700;}
+.data-box.accent{border-left:3px solid var(--accent);}
+.data-box.blue{border-left:3px solid var(--blue);}
+.data-box.green{border-left:3px solid var(--green);}
+.data-box.purple{border-left:3px solid var(--purple);}
+
+/* INFO BOXES */
+.ib{border-radius:9px;padding:0.8rem 1rem;font-size:0.84rem;line-height:1.7;margin-bottom:0.7rem;}
+.ib strong{font-weight:700;}
+.ib-warn{background:var(--red-dim);border:1px solid rgba(184,0,32,0.25);color:#6a0015;}
+.ib-warn::before{content:'⚠️ ';}
+.ib-note{background:var(--gold-dim);border:1px solid rgba(184,128,0,0.25);color:#5a4000;}
+.ib-note::before{content:'📌 ';}
+.ib-jury{background:#fff3e0;border:1px solid rgba(184,128,0,0.4);color:#5a3000;}
+.ib-jury::before{content:'🔒 JURY — ';}
+.ib-green{background:var(--green-dim);border:1px solid rgba(0,96,48,0.25);color:#003018;}
+
+/* REPLIQUES */
+.replique{background:var(--surface);border:1px solid var(--border);border-left:3px solid;border-radius:8px;padding:0.7rem 0.9rem;margin-bottom:0.5rem;font-size:0.84rem;line-height:1.6;}
+.replique .stage{font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.25rem;}
+.replique .signal{font-size:0.72rem;font-weight:600;font-style:italic;margin-top:0.25rem;}
+
+/* GRILLE OFFIC */
+.grille-t{width:100%;border-collapse:collapse;font-size:0.83rem;}
+.grille-t th{background:var(--text);color:#f6f3ee;padding:0.55rem 0.8rem;text-align:center;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;}
+.grille-t th:first-child{text-align:left;}
+.grille-t td{padding:0.6rem 0.8rem;border:1px solid var(--border);font-size:0.83rem;vertical-align:middle;}
+.grille-t .sec-row td{background:var(--surface2);font-weight:700;font-size:0.78rem;color:var(--text2);text-transform:uppercase;letter-spacing:0.04em;}
+.chk{text-align:center;width:48px;font-size:1rem;}
+
+/* BROUILLON */
+.brouillon-line{border-bottom:1px dashed var(--border2);padding:0.3rem 0;font-size:0.82rem;color:var(--text3);min-height:32px;}
+
+/* SONCASE CHIPS */
+.son-chips{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:0.6rem;}
+.son{padding:3px 9px;border-radius:999px;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.04em;}
+.son-S{background:var(--red-dim);color:var(--red);}
+.son-O{background:var(--gold-dim);color:var(--gold);}
+.son-N{background:var(--blue-dim);color:var(--blue);}
+.son-C{background:var(--green-dim);color:var(--green);}
+.son-A{background:var(--purple-dim);color:var(--purple);}
+.son-Sy{background:var(--accent-dim);color:var(--accent);}
+.son-E{background:var(--green-dim);color:var(--green);}
+
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:0.9rem;}
+
+@media print{
+  .mode-bar,.header{display:none !important;}
+  .view:not(.active){display:none !important;}
+  .main{padding:0.5rem;}
+  body{background:white;}
+}
+@media(max-width:640px){.g2{grid-template-columns:1fr;}.main{padding:1rem;}}
+::-webkit-scrollbar{width:5px;}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:999px;}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-logo">E2 <span>Epreuve</span> — Vendredi</div>
+  <div class="header-info">LP Francois de Mahy — CSVCPTH — Session 2026<br>Grille officielle CCF</div>
+</header>
+
+<div class="mode-bar">
+  <span class="mode-label">Candidat :</span>
+  <button class="mode-btn active" onclick="showView('kyllian')">🪵 Kyllian</button>
+  <button class="mode-btn" onclick="showView('alyanna')">🌿 Alyanna</button>
+  <button class="mode-btn" onclick="showView('adele')">🔩 Adele</button>
+  <button class="mode-btn" onclick="showView('kyrann')">🪚 Kyrann</button>
+  <div class="mode-sep"></div>
+  <span class="mode-label">Affichage :</span>
+  <button class="mode-btn jury-btn active" id="btn-candidat" onclick="setMode('candidat')">📄 Fiche candidat</button>
+  <button class="mode-btn jury-btn" id="btn-jury" onclick="setMode('jury')">🔒 Corrige jury</button>
+  <div class="mode-sep"></div>
+  <button class="mode-btn" onclick="window.print()" style="border-color:var(--blue);color:var(--blue)">🖨 Imprimer</button>
+</div>
+
+<div class="main">
+
+<!-- ═══════════════════════════════
+     KYLLIAN — CATENA PRO
+═══════════════════════════════ -->
+<div class="view active" id="view-kyllian">
+
+  <div class="candidate-hero">
+    <div class="hero-top" style="background:linear-gradient(135deg,#5a3010,#8a5020)">
+      <div>
+        <h2>🪵 Kyllian Fontaine — CATENA PRO Le Tampon</h2>
+        <p>Rayon Bois & Bardage — Epreuve E2 CCF Session 2026</p>
+      </div>
+      <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
+        <span class="badge">CCF E2</span>
+        <span class="badge-gold">30 min preparation</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FICHE CANDIDAT -->
+  <div class="candidat-content">
+
+    <div class="sit-badge s1">📋 Situation 1 — Vente d'une solution technique</div>
+
+    <div class="card bl-accent">
+      <div class="card-title">🏪 Contexte de l'entreprise</div>
+      <p style="font-size:0.85rem;line-height:1.75;color:var(--text2)">
+        CATENA PRO est un negoce en materiaux de construction au Tampon, specialise dans la clientele professionnelle et les particuliers. Le rayon bois propose du bois de structure, du bardage toutes gammes et toute la quincaillerie de pose associee. La TVA applicable a La Reunion est de <strong>8,5%</strong>.
+      </p>
+    </div>
+
+    <div class="card bl-accent">
+      <div class="card-title">👤 Situation de vente — Le client</div>
+      <div class="client-box">
+        <div class="client-name">M. Celestin — Arnaud, 48 ans</div>
+        <div class="client-job">Artisan peintre independant — 2 ouvriers — Le Tampon</div>
+        <div class="client-text">
+          Arnaud est artisan peintre depuis 20 ans. Un de ses clients particuliers lui a confie un chantier de <strong>renovation de facade</strong> sur une maison de plain-pied a La Plaine-des-Cafres. Il souhaite un bardage bois horizontal en pin. Arnaud fera la pose lui-meme avec ses ouvriers mais il <strong>n'a jamais pose de bardage bois</strong> — il connait la peinture, pas la menuiserie exterieure. Il a un devis a remettre a son client <strong>dans 3 jours</strong>.
+        </div>
+      </div>
+      <div class="ib ib-note">Le client vous fournira les dimensions de la facade lors de l'echange. A toi de poser les bonnes questions et de construire ta proposition.</div>
+    </div>
+
+    <div class="card bl-accent">
+      <div class="card-title">📝 Ta mission — Situation 1</div>
+      <ul style="font-size:0.85rem;line-height:2;color:var(--text2);padding-left:1.2rem">
+        <li>Accueillir le client professionnellement et decouvrir son projet</li>
+        <li>Identifier ses mobiles d'achat SONCASE</li>
+        <li>Proposer une <strong>solution bardage complete et adaptee</strong> au climat de La Plaine-des-Cafres</li>
+        <li>Argumenter avec la methode CAB en adequation avec les mobiles detectes</li>
+        <li>Proposer toutes les <strong>ventes complementaires</strong> indispensables au systeme</li>
+        <li>Proposer les <strong>ventes additionnelles</strong> et les <strong>EPI</strong></li>
+        <li>Presenter les <strong>services associes</strong> CATENA PRO</li>
+        <li>Conclure la vente et <strong>finaliser le devis</strong></li>
+      </ul>
+    </div>
+
+    <div class="sit-badge s2">📐 Situation 2 — Operations liees au projet client</div>
+
+    <div class="card bl-blue">
+      <div class="card-title">📐 Donnees techniques a exploiter</div>
+      <div class="g2">
+        <div class="data-box blue">
+          <strong>Facade a habiller :</strong><br>
+          Largeur : <strong>8 metres</strong><br>
+          Hauteur : <strong>3,20 metres</strong><br>
+          Deduction : 1 fenetre de <strong>1,20 m × 1,20 m</strong>
+        </div>
+        <div class="data-box blue">
+          <strong>Produit retenu :</strong><br>
+          Lame pin CL4 rainure-bouvete<br>
+          Section : <strong>27 × 145 mm</strong><br>
+          Recouvrement a prevoir : <strong>20 mm</strong><br>
+          Espacement tasseaux : <strong>50 cm entre axes</strong>
+        </div>
+      </div>
+      <div class="data-box blue">
+        <strong>Tarifs CATENA PRO (HT) :</strong> Lame pin CL4 27×145 mm : 3,80 €/ml — Tasseau CL4 27×40 mm : 1,20 €/ml — Pare-pluie HPV (rouleau 50 m²) : 45,00 € — Visserie inox A2 4×50 mm (boite 200) : 14,00 € — Agrafes inox pare-pluie (boite 200) : 12,00 € — Profile de depart alu 3 m : 9,00 €/ml — Lasure UV exterieure 1 L : 18,00 € — Traitement pot coupes : 15,00 € — Solin PVC 3 m : 8,00 €/ml — Grille anti-insectes inox (rouleau 5 m) : 28,00 € — EPI (kit gants+lunettes+masque) : 25,00 € — Livraison chantier : 59,00 €
+      </div>
+      <div class="ib ib-warn">C'est a toi de calculer toutes les quantites, les montants HT, la TVA a 8,5% et le total TTC. Presente un devis structure et justifie.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">📋 Brouillon — Espace de travail</div>
+      <div style="display:flex;flex-direction:column;gap:0.2rem;margin-bottom:1rem">
+        <div class="brouillon-line">Surface brute : ______ m × ______ m = ______ m²</div>
+        <div class="brouillon-line">Deduction ouvertures : ______ m × ______ m = ______ m²</div>
+        <div class="brouillon-line">Surface nette : ______ m²</div>
+        <div class="brouillon-line">Largeur utile lame : 145 mm - ______ mm recouvrement = ______ mm = ______ m</div>
+        <div class="brouillon-line">Metrage lames net : ______ m² ÷ ______ m = ______ ml</div>
+        <div class="brouillon-line">+ chute ______% : ______ ml × ______ = ______ ml a commander</div>
+        <div class="brouillon-line">Nb tasseaux : ______ m ÷ 0,50 m + 1 = ______ tasseaux × ______ m = ______ ml</div>
+        <div class="brouillon-line">Nb vis : ______ ml ÷ 0,50 m × 2 vis × 1,05 = ______ vis → ______ boites</div>
+        <div class="brouillon-line">Total HT : ______________________</div>
+        <div class="brouillon-line">TVA 8,5% : ______________________</div>
+        <div class="brouillon-line">Total TTC : ______________________</div>
+      </div>
+    </div>
+
+    <div class="card bl-gold">
+      <div class="card-title">📋 Grille officielle CCF — Criteres evalues</div>
+      <div style="overflow-x:auto"><table class="grille-t">
+        <thead><tr><th>Critere</th><th>TI</th><th>I</th><th>S</th><th>TS</th></tr></thead>
+        <tbody>
+          <tr class="sec-row"><td colspan="5">Situation 1 — / 10</td></tr>
+          <tr><td>Mobilisation des connaissances techniques</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td></tr>
+          <tr><td>Argumentation de vente en adequation avec les produits</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td></tr>
+          <tr><td>Pertinence des conseils donnes</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td></tr>
+          <tr><td>Qualite de la communication professionnelle</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td></tr>
+          <tr><td>Finalisation de la vente et services associes</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td></tr>
+          <tr><td>Reperage points forts et faibles de la prestation</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td></tr>
+          <tr class="sec-row"><td colspan="5">Situation 2 — / 10</td></tr>
+          <tr><td>Diagnostic faisabilite et connaissances techniques</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td></tr>
+          <tr><td>Pertinence des solutions proposees</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td></tr>
+          <tr><td>Justesse des calculs effectues</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td></tr>
+          <tr><td>Fiabilite des operations liees au projet client</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td></tr>
+          <tr><td>Prise en compte des remarques et propositions du client</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td></tr>
+          <tr><td>Respect reglementation, hygiene, securite, EPI</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+  </div><!-- fin candidat-content -->
+
+  <!-- CORRIGE JURY — masque par defaut -->
+  <div class="jury-content" style="display:none">
+
+    <div class="card" style="background:#fff8e8;border:2px solid var(--gold)">
+      <div class="card-title" style="color:var(--gold)">🔒 Corrige jury — NE PAS DIFFUSER AU CANDIDAT</div>
+
+      <div class="ib ib-jury" style="margin-bottom:1rem">Mobiles SONCASE a detecter : <strong>SECURITE</strong> (artisan qui n'a jamais pose de bardage — reputation professionnelle en jeu) · <strong>ARGENT</strong> (devis a remettre dans 3 jours, budget client 3 500 € TTC) · <strong>CONFORT</strong> (systeme logique et facile a poser pour un peintre non menuisier)</div>
+
+      <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:0.82rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--text3);margin-bottom:0.6rem">Repliques client simulateur</div>
+
+      <div class="replique" style="border-left-color:var(--accent)">
+        <div class="stage">Entree</div>
+        Bonjour, je cherche du bardage bois pour une facade. C'est pour un client a moi a La Plaine-des-Cafres, la facade fait 8 metres de large sur 3 metres 20 de haut, avec une fenetre de 1,20 m par 1,20 m.
+        <div class="signal" style="color:var(--gold)">→ Signal ARGENT : "Mon client a un budget de 3 500 euros TTC materiel"</div>
+      </div>
+      <div class="replique" style="border-left-color:var(--red)">
+        <div class="stage">Signal SECURITE</div>
+        Moi je suis peintre, j'ai jamais pose de bardage bois... Je veux pas faire de betises, c'est ma reputation qui est en jeu.
+        <div class="signal" style="color:var(--red)">→ Signal SECURITE fort — attendre que le candidat le capte et rassure</div>
+      </div>
+      <div class="replique" style="border-left-color:var(--green)">
+        <div class="stage">Signal CONFORT</div>
+        Le systeme avec les tasseaux, le pare-pluie... c'est complique a mettre en oeuvre pour quelqu'un qui connait pas ?
+        <div class="signal" style="color:var(--green)">→ Signal CONFORT — le candidat doit expliquer le systeme etape par etape</div>
+      </div>
+      <div class="replique" style="border-left-color:var(--red)">
+        <div class="stage">Objection</div>
+        Des vis acier galvanisee j'en ai plein dans mon camion, je peux pas les utiliser ?
+        <div class="signal" style="color:var(--red)">→ Le candidat DOIT refuser et expliquer la reaction chimique avec le bois traite CL4</div>
+      </div>
+      <div class="replique" style="border-left-color:var(--gold)">
+        <div class="stage">Conclusion</div>
+        Vous pouvez me faire le devis complet pour que je le transmette a mon client ?
+      </div>
+
+      <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:0.82rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--text3);margin:1rem 0 0.6rem">Resultats de calcul attendus</div>
+      <div class="data-box green">
+        Surface brute : 8 × 3,20 = 25,60 m² — Deduction : 1,44 m² — Surface nette : <strong>24,16 m²</strong><br>
+        Largeur utile lame : 145 - 20 = 125 mm = 0,125 m<br>
+        Metrage lames net : 24,16 ÷ 0,125 = <strong>193,3 ml</strong> · +10% chute = <strong>≈ 213 ml (54 barres 4 m)</strong><br>
+        Tasseaux : 8 ÷ 0,50 + 1 = 17 tasseaux × 3,20 m = 54,4 ml · +10% = <strong>≈ 60 ml</strong><br>
+        Vis : 213 ÷ 0,50 × 2 × 1,05 = <strong>895 vis → 5 boites de 200</strong><br>
+        Total HT attendu : <strong>≈ 1 245 € HT</strong> · TVA 8,5% : ≈ 106 € · <strong>Total TTC ≈ 1 350 €</strong><br>
+        <em>(Bien en dessous du budget client de 3 500 € TTC — le candidat doit le signaler)</em>
+      </div>
+    </div>
+
+  </div><!-- fin jury-content -->
+
+</div><!-- fin kyllian -->
+
+
+<!-- ═══════════════════════════════
+     ALYANNA — TERRASSE + PERGOLA
+═══════════════════════════════ -->
+<div class="view" id="view-alyanna">
+
+  <div class="candidate-hero">
+    <div class="hero-top" style="background:linear-gradient(135deg,#003820,#006040)">
+      <div>
+        <h2>🌿 Alyanna — Amenagement exterieur</h2>
+        <p>Terrasse, revetements exterieurs, pergolas — Epreuve E2 CCF Session 2026</p>
+      </div>
+      <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
+        <span class="badge">CCF E2</span>
+        <span class="badge-gold">30 min preparation</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="candidat-content">
+
+    <div class="sit-badge s1">📋 Situation 1 — Vente d'une solution technique</div>
+
+    <div class="card bl-green">
+      <div class="card-title">🏪 Contexte de l'entreprise</div>
+      <p style="font-size:0.85rem;line-height:1.75;color:var(--text2)">L'enseigne propose des solutions completes d'amenagement exterieur : revetements de terrasse (carrelage, composite, bois), pergolas, clotures et mobilier de jardin. Alyanna conseille sur les projets terrasse et amenagement paysager. TVA Reunion : <strong>8,5%</strong>.</p>
+    </div>
+
+    <div class="card bl-green">
+      <div class="card-title">👤 Situation de vente — Le client</div>
+      <div class="client-box">
+        <div class="client-name">Mme Grondin-Lauret — Isabelle, 52 ans</div>
+        <div class="client-job">Directrice d'ecole — Proprietaire — Saint-Pierre</div>
+        <div class="client-text">
+          Isabelle vient de faire construire une extension de maison. Elle dispose d'une <strong>terrasse brute</strong> qu'elle veut amenager. Elle souhaite un revetement durable, une protection solaire pour l'apres-midi (terrasse exposee plein ouest) et souhaite vegetaliser l'espace. Elle recoit regulierement sa famille et ses collegues. Elle a un <strong>budget de 8 000 euros TTC</strong> pour l'ensemble du projet.
+        </div>
+      </div>
+      <div class="ib ib-note">Les dimensions de la terrasse et les choix produits seront a decouvrir par le questionnement. C'est a toi d'identifier les besoins et les mobiles d'achat.</div>
+    </div>
+
+    <div class="card bl-green">
+      <div class="card-title">📝 Ta mission — Situation 1</div>
+      <ul style="font-size:0.85rem;line-height:2;color:var(--text2);padding-left:1.2rem">
+        <li>Accueillir et decouvrir le projet complet (dimensions, usage, exposition, contraintes)</li>
+        <li>Identifier les mobiles d'achat SONCASE</li>
+        <li>Proposer un <strong>revetement exterieur adapte</strong> (antiderapant, durable, esthetique)</li>
+        <li>Proposer une <strong>solution d'ombrage</strong> adaptee a l'exposition plein ouest</li>
+        <li>Argumenter avec la methode CAB en adequation avec les mobiles detectes</li>
+        <li>Proposer toutes les <strong>ventes complementaires</strong> (colle, joint, profils, fixations)</li>
+        <li>Proposer les <strong>ventes additionnelles</strong> (mobilier, vegetaux, eclairage)</li>
+        <li>Presenter les <strong>services associes</strong> (pose, livraison, financement)</li>
+        <li>Conclure et <strong>finaliser le devis TTC</strong> dans le respect du budget</li>
+      </ul>
+    </div>
+
+    <div class="sit-badge s2">📐 Situation 2 — Operations liees au projet client</div>
+
+    <div class="card bl-blue">
+      <div class="card-title">📐 Donnees techniques a exploiter</div>
+      <div class="g2">
+        <div class="data-box blue">
+          <strong>Terrasse :</strong><br>
+          Largeur : <strong>7 metres</strong><br>
+          Profondeur : <strong>4 metres</strong><br>
+          Exposition : plein ouest<br>
+          Pas d'obstacles ni deductions
+        </div>
+        <div class="data-box blue">
+          <strong>Contraintes techniques :</strong><br>
+          Pente d'ecoulement obligatoire : <strong>1 cm/ml minimum</strong><br>
+          Antiderapant requis : <strong>classe R11 minimum</strong><br>
+          Pergola souhaitee : couvre 4 m × 3 m
+        </div>
+      </div>
+      <div class="data-box blue">
+        <strong>Tarifs indicatifs (HT) :</strong> Carrelage gres cerame R11 60×60 : 32,00 €/m² — Colle C2 flex exterieur (sac 25 kg, rendement 4 m²/sac) : 18,00 €/sac — Joint souple exterieur (sac 5 kg, rendement 8 m²/sac) : 14,00 €/sac — Profile de rive alu : 8,50 €/ml — Pergola bioclimatique alu 4×3 m : 3 200,00 € — Option LED pergola : 320,00 € — Option capteur pluie : 180,00 € — Pose carrelage : 35,00 €/m² — Pose pergola (forfait) : 800,00 € — Mobilier (table+6 chaises) : 680,00 € — Jardinières+plantes (3 grands) : 210,00 € — Livraison : 89,00 €
+      </div>
+      <div class="ib ib-warn">C'est a toi de calculer la surface, les quantites de colle et de joint, le lineaire de profil de rive, le devis HT, la TVA 8,5% et le total TTC. Verifie que le devis reste dans le budget de 8 000 € TTC.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">📋 Brouillon — Espace de travail</div>
+      <div style="display:flex;flex-direction:column;gap:0.2rem;margin-bottom:1rem">
+        <div class="brouillon-line">Surface terrasse : ______ m × ______ m = ______ m²</div>
+        <div class="brouillon-line">+ chute ______% : ______ m² a commander</div>
+        <div class="brouillon-line">Sacs de colle (1 sac = 4 m²) : ______ m² ÷ 4 = ______ sacs</div>
+        <div class="brouillon-line">Sacs de joint (1 sac = 8 m²) : ______ m² ÷ 8 = ______ sacs</div>
+        <div class="brouillon-line">Perimetre terrasse : (______ + ______) × 2 = ______ ml de profil de rive</div>
+        <div class="brouillon-line">Sous-total revetement HT : ______</div>
+        <div class="brouillon-line">Sous-total pergola HT : ______</div>
+        <div class="brouillon-line">Pose + mobilier + livraison HT : ______</div>
+        <div class="brouillon-line">Total HT : ______</div>
+        <div class="brouillon-line">TVA 8,5% : ______</div>
+        <div class="brouillon-line">Total TTC : ______ (budget : 8 000 €)</div>
+      </div>
+    </div>
+
+    <div class="card bl-gold">
+      <div class="card-title">📋 Grille officielle CCF</div>
+      <div style="overflow-x:auto"><table class="grille-t">
+        <thead><tr><th>Critere</th><th>TI</th><th>I</th><th>S</th><th>TS</th></tr></thead>
+        <tbody>
+          <tr class="sec-row"><td colspan="5">Situation 1 — / 10</td></tr>
+          <tr><td>Mobilisation des connaissances techniques</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td></tr>
+          <tr><td>Argumentation de vente en adequation avec les produits</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td></tr>
+          <tr><td>Pertinence des conseils donnes</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td></tr>
+          <tr><td>Qualite de la communication professionnelle</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td></tr>
+          <tr><td>Finalisation de la vente et services associes</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td></tr>
+          <tr><td>Reperage points forts et faibles de la prestation</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td></tr>
+          <tr class="sec-row"><td colspan="5">Situation 2 — / 10</td></tr>
+          <tr><td>Diagnostic faisabilite et connaissances techniques</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td></tr>
+          <tr><td>Pertinence des solutions proposees</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td></tr>
+          <tr><td>Justesse des calculs effectues</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td></tr>
+          <tr><td>Fiabilite des operations liees au projet client</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td></tr>
+          <tr><td>Prise en compte des remarques et propositions du client</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td></tr>
+          <tr><td>Respect reglementation, hygiene, securite, EPI</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+  </div>
+
+  <div class="jury-content" style="display:none">
+    <div class="card" style="background:#fff8e8;border:2px solid var(--gold)">
+      <div class="card-title" style="color:var(--gold)">🔒 Corrige jury — NE PAS DIFFUSER</div>
+
+      <div class="ib ib-jury" style="margin-bottom:1rem">Mobiles SONCASE a detecter : <strong>ORGUEIL</strong> (elle recoit professionnellement, veut une terrasse qui fasse impression) · <strong>SECURITE</strong> (carrelage antiderapant R11 — elle a peur des chutes) · <strong>CONFORT</strong> (utiliser la terrasse en plein apres-midi malgre le soleil plein ouest)</div>
+
+      <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:0.82rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--text3);margin-bottom:0.6rem">Repliques client simulateur</div>
+      <div class="replique" style="border-left-color:var(--green)">
+        <div class="stage">Entree</div>
+        Bonjour, je viens de faire une extension et j'ai une terrasse de 7 metres sur 4 metres a amenager, exposee plein ouest.
+      </div>
+      <div class="replique" style="border-left-color:var(--gold)">
+        <div class="stage">Signal ORGUEIL</div>
+        Je recois beaucoup mes collegues et partenaires. Je veux quelque chose de vraiment beau, qui fasse son effet, un peu comme dans les magazines.
+        <div class="signal" style="color:var(--gold)">→ Signal ORGUEIL — le candidat doit rebondir sur l'esthetique et le standing</div>
+      </div>
+      <div class="replique" style="border-left-color:var(--red)">
+        <div class="stage">Signal SECURITE</div>
+        Mon carrelage actuel glisse quand il pleut, j'ai failli tomber plusieurs fois. Je veux quelque chose de vraiment antiderapant.
+        <div class="signal" style="color:var(--red)">→ Signal SECURITE — le candidat doit mentionner la norme R11 obligatoirement</div>
+      </div>
+      <div class="replique" style="border-left-color:var(--green)">
+        <div class="stage">Signal CONFORT</div>
+        Plein ouest ca chauffe vraiment l'apres-midi... Est-ce que vous proposez des pergolas ? J'aimerais pouvoir utiliser ma terrasse meme en plein soleil.
+        <div class="signal" style="color:var(--green)">→ Signal CONFORT — pergola bioclimatique a proposer</div>
+      </div>
+      <div class="replique" style="border-left-color:var(--red)">
+        <div class="stage">Objection budget</div>
+        La pergola ca me plait mais est-ce que ca rentre dans mes 8 000 euros ?
+        <div class="signal" style="color:var(--red)">→ Le candidat doit faire le calcul et, si depassement, proposer un ajustement</div>
+      </div>
+
+      <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:0.82rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--text3);margin:1rem 0 0.6rem">Resultats attendus</div>
+      <div class="data-box green">
+        Surface : 7 × 4 = 28 m² · +10% chute = <strong>30,8 m²</strong><br>
+        Colle C2 : 28 ÷ 4 = <strong>7 sacs</strong> · Joint : 28 ÷ 8 = <strong>4 sacs (3,5 arrondi)</strong><br>
+        Profil rive : (7+4) × 2 - 1 acces ≈ <strong>19 ml</strong><br>
+        Total HT attendu complet (revetement + pergola + pose + mobilier + livraison) : <strong>≈ 7 788 € HT</strong><br>
+        TVA 8,5% : ≈ 662 € · <strong>Total TTC ≈ 8 450 €</strong><br>
+        <em>Legerement au-dessus de 8 000 € → le candidat doit proposer un ajustement (ex : supprimer option capteur pluie −195 € TTC → ≈ 8 255 € TTC, toujours au-dessus. Ou negocier mobilier moins cher)</em>
+      </div>
+    </div>
+  </div>
+
+</div><!-- fin alyanna -->
+
+
+<!-- ═══════════════════════════════
+     ADELE — GROSSISTE ALUMINIUM
+═══════════════════════════════ -->
+<div class="view" id="view-adele">
+
+  <div class="candidate-hero">
+    <div class="hero-top" style="background:linear-gradient(135deg,#3a006a,#600090)">
+      <div>
+        <h2>🔩 Adele — Negoce aluminium</h2>
+        <p>Composants menuiserie professionnelle — Epreuve E2 CCF Session 2026</p>
+      </div>
+      <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
+        <span class="badge">CCF E2</span>
+        <span class="badge-gold">30 min preparation</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="candidat-content">
+
+    <div class="sit-badge s1">📋 Situation 1 — Vente et gestion relation client pro</div>
+
+    <div class="card bl-purple">
+      <div class="card-title">🏪 Contexte de l'entreprise</div>
+      <p style="font-size:0.85rem;line-height:1.75;color:var(--text2)">Le negoce aluminium fournit exclusivement des artisans fabricants de menuiseries (fenetres, portes, verandas). Il commercialise des profiles, joints EPDM, quincaillerie et vitrages. Adele est commerciale sedentaire — elle prend les commandes, etablit les devis et gere les livraisons. TVA Reunion : <strong>8,5%</strong>.</p>
+    </div>
+
+    <div class="card bl-purple">
+      <div class="card-title">👤 Situation de vente — Le client</div>
+      <div class="client-box">
+        <div class="client-name">M. Benard — Christophe, 44 ans</div>
+        <div class="client-job">Artisan fabricant menuiseries alu — 3 ouvriers — Saint-Louis</div>
+        <div class="client-text">
+          Christophe est un <strong>client regulier depuis 4 ans</strong>. Il vient passer une commande pour <strong>3 chantiers</strong> en cours. Il signale que sa derniere livraison comportait <strong>2 profiles tordus</strong> qui lui ont fait perdre une demi-journee sur chantier. Il souhaite un geste commercial et mentionne qu'un concurrent lui a propose <strong>8% de remise</strong>.
+        </div>
+      </div>
+      <div class="ib ib-warn">Situation sensible : client fidele mecontente par un incident qualite + pression concurrentielle. Tu dois gerer la reclamation ET realiser la commande.</div>
+    </div>
+
+    <div class="card bl-purple">
+      <div class="card-title">📝 Ta mission — Situation 1</div>
+      <ul style="font-size:0.85rem;line-height:2;color:var(--text2);padding-left:1.2rem">
+        <li>Accueillir le client et <strong>ecouter la reclamation</strong> sans l'interrompre</li>
+        <li>Identifier ses mobiles d'achat SONCASE</li>
+        <li>Reformuler et <strong>traiter l'incident qualite</strong> avec un geste commercial approprie</li>
+        <li>Argumenter face a la concurrence en valorisant la <strong>relation et les services</strong></li>
+        <li>Prendre la <strong>commande complete</strong> pour les 3 chantiers</li>
+        <li>Proposer les <strong>complementaires</strong> : joints, visserie, quincaillerie</li>
+        <li>Presenter les <strong>services associes</strong> : delai livraison, compte mensuel, contact direct</li>
+        <li>Etablir le <strong>devis avec remise calculee</strong> et TVA 8,5%</li>
+      </ul>
+    </div>
+
+    <div class="sit-badge s2">📐 Situation 2 — Calcul de commande et negociation commerciale</div>
+
+    <div class="card bl-blue">
+      <div class="card-title">📐 Donnees techniques a exploiter</div>
+      <div class="data-box blue">
+        <strong>Chantier A — Villa neuve Cilaos :</strong> 8 fenetres coulissantes 120×120 cm<br>
+        Profiles cadre coulissant 6 m : 12,50 €/barre · Profiles ouvrant 6 m : 11,00 €/barre<br>
+        Joint EPDM : 1,20 €/ml · Galets de roulement : 8,50 €/jeu · Poignees+condamnation : 12,00 €/jeu
+      </div>
+      <div class="data-box blue">
+        <strong>Chantier B — Renovation appartement :</strong> 4 portes-fenetres 90×215 cm<br>
+        Profiles dormant PF 6 m : 13,50 €/barre · Profiles ouvrant PF 6 m : 12,00 €/barre<br>
+        Joint EPDM : 1,20 €/ml · Charnieres 3D : 6,50 €/unite · Serrure multipoints : 38,00 €<br>
+        Seuil aluminium anodise : 22,00 €/ml
+      </div>
+      <div class="data-box blue">
+        <strong>Chantier C — Veranda 15 m² :</strong> profiles perimetre veranda<br>
+        Profile pied 6 m : 18,00 €/barre · Profile faitage 6 m : 22,00 €/barre · Profile chevron 6 m : 16,50 €/barre<br>
+        Connecteurs et angles (lot) : 45,00 € · Joint etancheite toiture (rouleau 10 m) : 28,00 €
+      </div>
+      <div class="data-box blue">
+        <strong>Visserie et accessoires divers :</strong> forfait a chiffrer — <strong>Avoir incident qualite</strong> a proposer — <strong>Remise commerciale</strong> a negocier (le concurrent propose 8%)
+      </div>
+      <div class="ib ib-warn">C'est a toi de determiner les quantites pour chaque chantier, calculer chaque sous-total, proposer un geste commercial justifie, appliquer la TVA 8,5% et etablir le total TTC.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">📋 Brouillon — Espace de travail</div>
+      <div style="display:flex;flex-direction:column;gap:0.2rem">
+        <div class="brouillon-line">Chantier A — 8 fenetres 120×120 : profiles cadre = ____ barres, ouvrant = ____ barres</div>
+        <div class="brouillon-line">Joint perimetre A : 8 fenetres × (1,20+1,20+1,20+1,20) m = ______ ml</div>
+        <div class="brouillon-line">Sous-total A : ______________________</div>
+        <div class="brouillon-line">Chantier B — 4 PF 90×215 : dormant = ____ barres, ouvrant = ____ barres, charnieres = ____ </div>
+        <div class="brouillon-line">Joint perimetre B : 4 PF × (0,90+2,15+0,90+2,15) m = ______ ml · Seuil = ______ ml</div>
+        <div class="brouillon-line">Sous-total B : ______________________</div>
+        <div class="brouillon-line">Chantier C — veranda : pieds = ____ barres, faitage = ____ barres, chevrons = ____ barres</div>
+        <div class="brouillon-line">Sous-total C : ______________________</div>
+        <div class="brouillon-line">Total brut HT : ______________________</div>
+        <div class="brouillon-line">Geste commercial (avoir incident) : - ______</div>
+        <div class="brouillon-line">Remise commerciale ____% : - ______</div>
+        <div class="brouillon-line">Total HT net : ______________________</div>
+        <div class="brouillon-line">TVA 8,5% : ______________________</div>
+        <div class="brouillon-line">Total TTC : ______________________</div>
+      </div>
+    </div>
+
+    <div class="card bl-gold">
+      <div class="card-title">📋 Grille officielle CCF</div>
+      <div style="overflow-x:auto"><table class="grille-t">
+        <thead><tr><th>Critere</th><th>TI</th><th>I</th><th>S</th><th>TS</th></tr></thead>
+        <tbody>
+          <tr class="sec-row"><td colspan="5">Situation 1 — / 10</td></tr>
+          <tr><td>Mobilisation des connaissances techniques</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td></tr>
+          <tr><td>Argumentation de vente en adequation avec les produits</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td></tr>
+          <tr><td>Pertinence des conseils donnes</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td></tr>
+          <tr><td>Qualite de la communication professionnelle</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td></tr>
+          <tr><td>Finalisation de la vente et services associes</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td></tr>
+          <tr><td>Reperage points forts et faibles de la prestation</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td></tr>
+          <tr class="sec-row"><td colspan="5">Situation 2 — / 10</td></tr>
+          <tr><td>Diagnostic faisabilite et connaissances techniques</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td></tr>
+          <tr><td>Pertinence des solutions proposees</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td></tr>
+          <tr><td>Justesse des calculs effectues</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td></tr>
+          <tr><td>Fiabilite des operations liees au projet client</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td></tr>
+          <tr><td>Prise en compte des remarques et propositions du client</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td></tr>
+          <tr><td>Respect reglementation, hygiene, securite, EPI</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+  </div>
+
+  <div class="jury-content" style="display:none">
+    <div class="card" style="background:#fff8e8;border:2px solid var(--gold)">
+      <div class="card-title" style="color:var(--gold)">🔒 Corrige jury — NE PAS DIFFUSER</div>
+      <div class="ib ib-jury">Mobiles SONCASE : <strong>ARGENT</strong> (pression concurrente 8% + incident qui lui a coute du temps) · <strong>SECURITE</strong> (qualite des profiles — il ne peut pas se permettre d'autres profiles tordus) · <strong>SYMPATHIE</strong> (client fidele 4 ans — veut etre reconnu et valorise)</div>
+
+      <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:0.82rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--text3);margin-bottom:0.6rem">Repliques client simulateur</div>
+      <div class="replique" style="border-left-color:var(--red)">
+        <div class="stage">Entree — Reclamation immediate</div>
+        Bonjour Adele. J'ai une commande pour mes 3 chantiers mais d'abord je veux qu'on parle de ma derniere livraison — 2 profiles tordus, j'ai perdu une demi-journee. C'est inacceptable.
+        <div class="signal" style="color:var(--red)">→ Laisser Adele ecouter et reformuler — ne pas minimiser</div>
+      </div>
+      <div class="replique" style="border-left-color:var(--gold)">
+        <div class="stage">Signal SYMPATHIE</div>
+        Ca fait 4 ans que je commande chez vous. 4 ans. J'esperais que ca se passe mieux.
+        <div class="signal" style="color:var(--gold)">→ Signal SYMPATHIE — Adele doit valoriser la fidelite</div>
+      </div>
+      <div class="replique" style="border-left-color:var(--purple)">
+        <div class="stage">Signal ARGENT + pression concurrence</div>
+        J'ai ete contacte par un autre fournisseur. Il me propose 8% de remise systematique. Vous pouvez faire pareil ?
+        <div class="signal" style="color:var(--purple)">→ Adele doit negocier — proposer une remise inferieure mais argumentee (SAV local, relation, livraison rapide)</div>
+      </div>
+      <div class="replique" style="border-left-color:var(--red)">
+        <div class="stage">Urgence</div>
+        Pour les 3 chantiers, j'ai besoin de la livraison avant vendredi. C'est possible ?
+      </div>
+
+      <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:0.82rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--text3);margin:1rem 0 0.6rem">Resultats attendus</div>
+      <div class="data-box green">
+        <strong>Chantier A :</strong> 8 fenetres 120×120 — cadre : 16 barres, ouvrant : 12 barres, joint : 8×4,80=38,4 ml arrondi 39 ml, 8 jeux galets, 8 jeux poignees → <strong>≈ 543 € HT</strong><br>
+        <strong>Chantier B :</strong> 4 PF 90×215 — dormant : 8 barres, ouvrant : 6 barres, joint : 4×6,10=24,4 ml arrondi 25 ml, 12 charnieres, 4 serrures, seuil 3,6 ml → <strong>≈ 519 € HT</strong><br>
+        <strong>Chantier C :</strong> veranda — pieds : 5 barres, faitage : 3 barres, chevrons : 8 barres, 2 lots connecteurs, 3 rouleaux joint → <strong>≈ 462 € HT</strong><br>
+        Visserie divers : ≈ 120 € HT · Total brut : ≈ 1 644 € HT<br>
+        Geste avoir incident : −25 € · Remise 5% justifiee : −82 € → <strong>Total HT net ≈ 1 537 €</strong><br>
+        TVA 8,5% : ≈ 131 € · <strong>Total TTC ≈ 1 668 €</strong><br>
+        <em>Remise 5% (vs 8% concurrent) : Adele argumente SAV sur place, livraison 48h garantie, relation 4 ans, qualite tracee. Ecart = 50 € sur cette commande.</em>
+      </div>
+    </div>
+  </div>
+
+</div><!-- fin adele -->
+
+
+<!-- ═══════════════════════════════
+     KYRANN — DRESSING SUR-MESURE
+═══════════════════════════════ -->
+<div class="view" id="view-kyrann">
+
+  <div class="candidate-hero">
+    <div class="hero-top" style="background:linear-gradient(135deg,#602000,#a04020)">
+      <div>
+        <h2>🪚 Kyrann — Agencement sur-mesure</h2>
+        <p>Dressing, menuiserie interieure sur-mesure — Epreuve E2 CCF Session 2026</p>
+      </div>
+      <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
+        <span class="badge">CCF E2</span>
+        <span class="badge-gold">30 min preparation</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="candidat-content">
+
+    <div class="sit-badge s1">📋 Situation 1 — Vente d'une solution technique</div>
+
+    <div class="card bl-accent">
+      <div class="card-title">🏪 Contexte de l'entreprise</div>
+      <p style="font-size:0.85rem;line-height:1.75;color:var(--text2)">L'atelier sur-mesure fabrique et pose des dressings, cuisines et bibliotheques sur-mesure. La fabrication est realisee en atelier (debit CNC, plaquage). Kyrann est conseiller commercial et chef de projet — il realise les plans, chiffre et suit la pose. TVA Reunion : <strong>8,5%</strong>.</p>
+    </div>
+
+    <div class="card bl-accent">
+      <div class="card-title">👤 Situation de vente — Le client</div>
+      <div class="client-box">
+        <div class="client-name">Mme Ah-Fat — Priscilla, 37 ans</div>
+        <div class="client-job">Infirmiere — Couple avec 2 enfants — Maison individuelle Saint-Pierre</div>
+        <div class="client-text">
+          Priscilla vient de faire construire sa maison. Elle souhaite un <strong>dressing sur-mesure</strong> dans un espace dedie de sa chambre parentale. Elle a des besoins specifiques en matiere de rangement. Elle mentionne avoir vu des dressings en kit chez un concurrent pour <strong>900 euros</strong> mais prefere le sur-mesure si ca reste dans son budget de <strong>1 800 euros TTC maximum</strong>.
+        </div>
+      </div>
+      <div class="ib ib-note">Les dimensions de l'alcove et les besoins detailles seront a decouvrir par le questionnement. C'est a toi d'identifier les besoins et les mobiles d'achat.</div>
+    </div>
+
+    <div class="card bl-accent">
+      <div class="card-title">📝 Ta mission — Situation 1</div>
+      <ul style="font-size:0.85rem;line-height:2;color:var(--text2);padding-left:1.2rem">
+        <li>Accueillir et <strong>diagnostiquer le projet</strong> (dimensions alcove, besoins rangement, contraintes)</li>
+        <li>Identifier les mobiles d'achat SONCASE</li>
+        <li>Proposer une <strong>configuration de dressing sur-mesure adaptee</strong></li>
+        <li>Argumenter avec CAB en adequation avec les mobiles detectes</li>
+        <li>Argumenter le <strong>sur-mesure versus le kit</strong> concurrent</li>
+        <li>Proposer les <strong>ventes additionnelles</strong> (accessoires, eclairage, organiseurs)</li>
+        <li>Presenter les <strong>services associes</strong> (plan 3D, pose, garantie, financement)</li>
+        <li>Etablir le <strong>devis TTC</strong> dans le respect du budget de 1 800 €</li>
+      </ul>
+    </div>
+
+    <div class="sit-badge s2">📐 Situation 2 — Calcul et plan du dressing</div>
+
+    <div class="card bl-blue">
+      <div class="card-title">📐 Donnees techniques a exploiter</div>
+      <div class="g2">
+        <div class="data-box blue">
+          <strong>Alcove a equipper :</strong><br>
+          Largeur : <strong>2,60 m</strong><br>
+          Hauteur : <strong>2,20 m</strong><br>
+          Profondeur : <strong>0,65 m</strong>
+        </div>
+        <div class="data-box blue">
+          <strong>Besoins client :</strong><br>
+          Penderie robes longues (min 150 cm de hauteur libre)<br>
+          Etageres chaussures (nombreuses paires)<br>
+          Tiroirs lingerie et accessoires<br>
+          Espace pour le compagnon<br>
+          Miroir en facade
+        </div>
+      </div>
+      <div class="data-box blue">
+        <strong>Tarifs atelier (HT) :</strong> Joues laterales melamine 18 mm : 48,00 €/panneau · Planches interieures (etageres) : 22,00 €/planche · Fond MDF 10 mm (lot complet) : 85,00 € · Tiroir complet avec coulisse soft-close : 65,00 €/unite · Barre de suspension inox 80 cm : 18,00 €/unite · Porte coulissante miroir 130×220 cm : 185,00 €/vantail · Rail coulissant aluminium 260 cm : 35,00 €/rail (haut et bas) · LED strip automatique avec capteur : 48,00 € · Fixations et visserie (lot) : 18,00 € · Main-d'oeuvre pose (1 demi-journee) : 280,00 €
+      </div>
+      <div class="ib ib-warn">C'est a toi de determiner la configuration (nombre de colonnes, organisation interieure), calculer toutes les quantites, etablir le devis HT + TVA 8,5% = TTC. Le total doit rester sous 1 800 € TTC.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">📋 Brouillon — Espace de travail</div>
+      <div style="display:flex;flex-direction:column;gap:0.2rem">
+        <div class="brouillon-line">Configuration choisie : ______ colonnes de ______ cm chacune = ______ cm total</div>
+        <div class="brouillon-line">Joues laterales : ______ panneaux × 48 € = ______</div>
+        <div class="brouillon-line">Planches interieures (etageres + niveaux) : ______ planches × 22 € = ______</div>
+        <div class="brouillon-line">Fond MDF (lot) : 85 €</div>
+        <div class="brouillon-line">Tiroirs soft-close : ______ tiroirs × 65 € = ______</div>
+        <div class="brouillon-line">Barres de suspension inox : ______ barres × 18 € = ______</div>
+        <div class="brouillon-line">Portes coulissantes miroir : ______ vantaux × 185 € = ______</div>
+        <div class="brouillon-line">Rails alu (haut + bas) : ______ rails × 35 € = ______</div>
+        <div class="brouillon-line">LED strip + capteur : 48 €</div>
+        <div class="brouillon-line">Fixations et visserie : 18 €</div>
+        <div class="brouillon-line">Main-d'oeuvre pose : 280 €</div>
+        <div class="brouillon-line">TOTAL HT : ______________________</div>
+        <div class="brouillon-line">TVA 8,5% : ______________________</div>
+        <div class="brouillon-line">TOTAL TTC : ______________________ (budget : 1 800 €)</div>
+      </div>
+    </div>
+
+    <div class="card bl-gold">
+      <div class="card-title">📋 Grille officielle CCF</div>
+      <div style="overflow-x:auto"><table class="grille-t">
+        <thead><tr><th>Critere</th><th>TI</th><th>I</th><th>S</th><th>TS</th></tr></thead>
+        <tbody>
+          <tr class="sec-row"><td colspan="5">Situation 1 — / 10</td></tr>
+          <tr><td>Mobilisation des connaissances techniques</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td></tr>
+          <tr><td>Argumentation de vente en adequation avec les produits</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td></tr>
+          <tr><td>Pertinence des conseils donnes</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td></tr>
+          <tr><td>Qualite de la communication professionnelle</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td></tr>
+          <tr><td>Finalisation de la vente et services associes</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td></tr>
+          <tr><td>Reperage points forts et faibles de la prestation</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td></tr>
+          <tr class="sec-row"><td colspan="5">Situation 2 — / 10</td></tr>
+          <tr><td>Diagnostic faisabilite et connaissances techniques</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td></tr>
+          <tr><td>Pertinence des solutions proposees</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td></tr>
+          <tr><td>Justesse des calculs effectues</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td></tr>
+          <tr><td>Fiabilite des operations liees au projet client</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td></tr>
+          <tr><td>Prise en compte des remarques et propositions du client</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td></tr>
+          <tr><td>Respect reglementation, hygiene, securite, EPI</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td><td class="chk">□</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+  </div>
+
+  <div class="jury-content" style="display:none">
+    <div class="card" style="background:#fff8e8;border:2px solid var(--gold)">
+      <div class="card-title" style="color:var(--gold)">🔒 Corrige jury — NE PAS DIFFUSER</div>
+      <div class="ib ib-jury">Mobiles SONCASE : <strong>CONFORT</strong> (infirmiere qui rentre de nuit fatiguee — dressing organise = gain de temps le matin, uniformes toujours prets) · <strong>ORGUEIL</strong> (elle voit son dressing tous les matins — veut quelque chose de beau) · <strong>ARGENT</strong> (budget strict 1 800 € max, compare avec kit a 900 €)</div>
+
+      <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:0.82rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--text3);margin-bottom:0.6rem">Repliques client simulateur</div>
+      <div class="replique" style="border-left-color:var(--accent)">
+        <div class="stage">Entree</div>
+        Bonjour, j'ai un renfoncement dans ma chambre, 2 metres 60 de large sur 2 metres 20 de hauteur et 65 cm de profondeur, je voudrais en faire un dressing sur-mesure.
+      </div>
+      <div class="replique" style="border-left-color:var(--green)">
+        <div class="stage">Signal CONFORT</div>
+        Je suis infirmiere, je rentre parfois de nuit fatiguee. Le matin c'est toujours le chaos pour trouver mes affaires... Je veux un rangement parfait, tout a portee de main.
+        <div class="signal" style="color:var(--green)">→ Signal CONFORT fort — organisation, gain de temps</div>
+      </div>
+      <div class="replique" style="border-left-color:var(--gold)">
+        <div class="stage">Signal ORGUEIL</div>
+        Je veux aussi quelque chose de joli. Je vois ce dressing tous les matins, j'ai envie d'etre de bonne humeur en l'ouvrant !
+        <div class="signal" style="color:var(--gold)">→ Signal ORGUEIL — esthetique, portes miroir, LED</div>
+      </div>
+      <div class="replique" style="border-left-color:var(--purple)">
+        <div class="stage">Signal ARGENT + comparaison</div>
+        J'ai vu un dressing en kit chez [concurrent] pour 900 euros... C'est quoi la difference avec ce que vous proposez pour justifier le prix ?
+        <div class="signal" style="color:var(--purple)">→ Kyrann doit argumenter sur-mesure vs kit : adaptation exacte a l'alcove, pose comprise, garantie, finition</div>
+      </div>
+      <div class="replique" style="border-left-color:var(--accent)">
+        <div class="stage">Besoin precis</div>
+        Il me faut absolument une penderie pour mes robes longues, plein de place pour mes chaussures, des tiroirs, et laisser un espace pour mon mari aussi.
+      </div>
+
+      <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:0.82rem;text-transform:uppercase;letter-spacing:0.05em;color:var(--text3);margin:1rem 0 0.6rem">Resultats attendus</div>
+      <div class="data-box green">
+        Configuration attendue : <strong>3 colonnes</strong> (ex: 86+88+86 cm = 260 cm)<br>
+        Joues : 2 panneaux = 96 € · Planches interieures : ~12 planches = 264 € · Fond : 85 €<br>
+        Tiroirs : 2 min = 130 € · Barres suspension : 4 = 72 € · Portes miroir : 2 vantaux = 370 €<br>
+        Rails (haut+bas) : 2 rails = 70 € · LED : 48 € · Fixations : 18 € · Pose : 280 €<br>
+        <strong>Total HT ≈ 1 433 €</strong> · TVA 8,5% ≈ 122 € · <strong>Total TTC ≈ 1 555 €</strong><br>
+        <em>Bien en dessous du budget 1 800 € → marge de ~245 € pour accessoires additionnels (separateurs tiroirs, boites rangement, miroir sol)</em>
+      </div>
+    </div>
+  </div>
+
+</div><!-- fin kyrann -->
+
+</div><!-- fin .main -->
+
+<script>
+var currentView = 'kyllian';
+var currentMode = 'candidat';
+
+function showView(id) {
+  document.querySelectorAll('.view').forEach(function(v) { v.classList.remove('active'); });
+  document.querySelectorAll('.mode-btn:not(.jury-btn)').forEach(function(b) { b.classList.remove('active'); });
+  var el = document.getElementById('view-' + id);
+  if (el) el.classList.add('active');
+  document.querySelectorAll('.mode-btn').forEach(function(b) {
+    if (b.getAttribute('onclick') && b.getAttribute('onclick').indexOf("'" + id + "'") !== -1 && !b.classList.contains('jury-btn')) {
+      b.classList.add('active');
+    }
+  });
+  currentView = id;
+  applyMode();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function setMode(mode) {
+  currentMode = mode;
+  document.getElementById('btn-candidat').classList.toggle('active', mode === 'candidat');
+  document.getElementById('btn-jury').classList.toggle('active', mode === 'jury');
+  applyMode();
+}
+
+function applyMode() {
+  document.querySelectorAll('.candidat-content').forEach(function(el) {
+    el.style.display = currentMode === 'candidat' ? 'block' : 'none';
+  });
+  document.querySelectorAll('.jury-content').forEach(function(el) {
+    el.style.display = currentMode === 'jury' ? 'block' : 'none';
+  });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  applyMode();
+});
+</script>
+</body>
+</html>
